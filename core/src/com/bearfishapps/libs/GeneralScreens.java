@@ -1,5 +1,6 @@
 package com.bearfishapps.libs;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -13,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class GeneralScreens implements Screen {
     // needed for screen changes
-    protected GdxGame game;
+    protected Game game;
     // default background color (black) 0/255f for all paremeters
     private int color[] = {0, 0, 0, 0};
     // keyframe for 2d animation
@@ -26,12 +27,12 @@ public abstract class GeneralScreens implements Screen {
     protected Table table;
 
     // constructor with default screen size;
-    public GeneralScreens(GdxGame game) {
+    public GeneralScreens(Game game) {
         this(game, 800, 480);
     }
 
     // constructor with variable screen size;
-    public GeneralScreens(GdxGame game, int sizeX, int sizeY) {
+    public GeneralScreens(Game game, int sizeX, int sizeY) {
         this.game = game;
 
         camera = new OrthographicCamera();
