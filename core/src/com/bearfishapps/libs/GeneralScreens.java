@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -67,7 +66,7 @@ public abstract class GeneralScreens implements Screen {
         preShow(table, multiplexer);
 
         // UI and interaction stuff
-        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1f)));
+//        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1f)));
         multiplexer.addProcessor(stage);
 
         Gdx.input.setInputProcessor(multiplexer);

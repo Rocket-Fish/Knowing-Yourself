@@ -2,6 +2,8 @@ package com.knowyourself;
 
 import com.badlogic.gdx.Game;
 import com.knowyourself.screens.MainMenuScreen;
+import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.VisUI.SkinScale;
 
 public class MainGameClass extends Game {
 	public MainGameClass() {
