@@ -1,9 +1,7 @@
 package com.knowyourself;
 
 import com.badlogic.gdx.Game;
-import com.knowyourself.screens.MainMenuScreen;
-import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.VisUI.SkinScale;
+import com.knowyourself.TestingPackage.ScreenTesting;
 
 public class MainGameClass extends Game {
 	public MainGameClass() {
@@ -12,6 +10,7 @@ public class MainGameClass extends Game {
 	@Override
 	public void create () {
 //		this.setScreen(new SplashScreen(this));
-		this.setScreen(new MainMenuScreen(this));
+//		this.setScreen(new GameScreen(this));
+		this.setScreen(new ScreenTesting(this));
 	}
 }

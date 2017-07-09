@@ -7,9 +7,8 @@ import com.knowyourself.MainGameClass;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.resizable = false;
-		config.width = 800;
-		config.height = 480;
+		config.height = 720;
+		config.width = 1280;
 		new LwjglApplication(new MainGameClass(), config);
 	}
 }

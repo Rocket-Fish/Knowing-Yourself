@@ -5,10 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class GeneralScreens implements Screen {
@@ -20,31 +19,20 @@ public abstract class GeneralScreens implements Screen {
     private float keyFrame = 0;
 
     // camera and ui stuff
-    protected OrthographicCamera camera;
     protected Viewport viewport;
     protected Stage stage;
     protected Table table;
 
-    // constructor with default screen size;
-    public GeneralScreens(Game game) {
-        this(game, 800, 480);
-    }
-
     // constructor with variable screen size;
-    public GeneralScreens(Game game, int sizeX, int sizeY) {
+    public GeneralScreens(Game game) {
         this.game = game;
 
-        camera = new OrthographicCamera();
-        viewport = new ExtendViewport(sizeX, sizeY, camera);
-        ((ExtendViewport)viewport).setMaxWorldWidth(sizeX);
-        ((ExtendViewport)viewport).setMaxWorldHeight(sizeY*2);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
-        camera.update();
+        viewport = new ScreenViewport();
+//        ((ExtendViewport)viewport).setMaxWorldWidth(sizeX);
+//        ((ExtendViewport)viewport).setMaxWorldHeight(sizeY*2);
 
         stage = new Stage(viewport);
         table = new Table();
-
-        camera.update();
     }
 
     // change the background color to (rgb values must be between 0 and 255, and alpha must be between 0 and 100)
