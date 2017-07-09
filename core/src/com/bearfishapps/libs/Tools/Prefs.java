@@ -9,7 +9,7 @@ public class Prefs {
     public static void init(String prefName) {
         prefs = Gdx.app.getPreferences(prefName);
 /*        if (!prefs.contains(scoreName)) {
-            prefs.putInteger(Constants.scoreName, 0);
+            prefs.putInteger(constants.scoreName, 0);
             prefs.flush();
         }
         */
