@@ -48,6 +48,7 @@ public class GameScreen extends GeneralScreens {
 //        stage.addActor(new TestTextAreaAndScroll());
         DialogueTextPlane dtp = new DialogueTextPlane("", viewport);
         ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get("Characters/Player.jpg", Texture.class))));
+        iw.setPosition(0, viewport.getScreenHeight()/5);
         stage.addActor(dtp);
         stage.addActor(iw);
 
