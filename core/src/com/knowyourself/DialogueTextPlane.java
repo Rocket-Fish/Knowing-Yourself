@@ -9,6 +9,8 @@ import com.kotcrab.vis.ui.widget.VisWindow;
 
 public class DialogueTextPlane extends VisWindow{
     Viewport vpReference;
+    ScrollableTextArea textArea;
+
     public DialogueTextPlane(String title, Viewport viewport) {
         super(title, false);
         vpReference = viewport;
@@ -30,12 +32,16 @@ public class DialogueTextPlane extends VisWindow{
         });
     }
 
+    public void setText(String str) {
+        textArea.setText(str);
+    }
+
     public void updateSize() {
         setSize(vpReference.getScreenWidth(), vpReference.getScreenHeight()/5);
     }
 
     private void addVisWidgets () {
-        ScrollableTextArea textArea = new ScrollableTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis odio.\nFun thing: This text area supports scrolling.");
+        textArea = new ScrollableTextArea("This is an ordinary morning. You wake up at 7:20 and slip on your coat. Your foster fathers, Lawrence and Sol, are waiting for you just outside your room. Sol has his favourite grimace on. Sol used to be a military man, until he adopted you and ran away with Lawrence. Now your family hides in the small village of Fallow. The situation makes Sol grim for most of his days. Lawrence stays optimistic, at least outwardly. Sol is the one that greets you.");
         textArea.clearListeners();
 
 //        textArea.setDisabled(true);

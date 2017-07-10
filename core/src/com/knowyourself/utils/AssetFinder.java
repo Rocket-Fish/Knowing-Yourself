@@ -28,8 +28,8 @@ public class AssetFinder {
         this.resolver = resolver;
 
 //        assets.add(new AssetDescriptor("music", Music.class));
-        assets.add(new AssetDescriptor("Dialogues", Music.class)); // You could remove all but this one
         assets.add(new AssetDescriptor("Characters", Texture.class));
+        assets.add(new AssetDescriptor("Dialogues", Music.class));
     }
 
     public void load() {
