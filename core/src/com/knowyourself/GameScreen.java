@@ -40,7 +40,8 @@ public class GameScreen extends GeneralScreens {
         table.add().expand().fill();
 
 //        stage.addActor(new TestTextAreaAndScroll());
-        stage.addActor(new DialogueTextPlane("Someone Said", viewport));
+        DialogueTextPlane dtp = new DialogueTextPlane("Someone Said", viewport);
+        stage.addActor(dtp);
 
         stage.addListener(new InputListener() {
             boolean debug = false;

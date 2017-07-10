@@ -21,6 +21,7 @@ public class DialogueTextPlane extends VisWindow{
         setPosition(0, 0);
 //        setSize(sizeX, sizeY);
 //        setPosition(228, 300);
+        clearListeners();
         addListener(new GameScreen.WindowResizeListener() {
             @Override
             public void resize () {
@@ -35,6 +36,10 @@ public class DialogueTextPlane extends VisWindow{
 
     private void addVisWidgets () {
         ScrollableTextArea textArea = new ScrollableTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis odio.\nFun thing: This text area supports scrolling.");
+        textArea.clearListeners();
+
+//        textArea.setDisabled(true);
+        //TODO: need to make the text uneditable
 
         // ---
 
