@@ -27,9 +27,9 @@ public class AssetFinder {
         this.assetManager = assetManager;
         this.resolver = resolver;
 
-//        assets.add(new AssetDescriptor("music", Music.class));
         assets.add(new AssetDescriptor("Characters", Texture.class));
         assets.add(new AssetDescriptor("Dialogues", Music.class));
+        assets.add(new AssetDescriptor("DialogueText", String.class));
     }
 
     public void load() {
