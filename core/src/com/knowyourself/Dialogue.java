@@ -44,7 +44,7 @@ public class Dialogue{
         return content;
     }
 
-    public static Dialogue dalogueParser(String line) {
+    public static Dialogue dialogueParser(String line) {
         String[] bracketSections = line.split("}");
         String[] contentSections = bracketSections[bracketSections.length - 1].split("|");
         int nextLine = -1;

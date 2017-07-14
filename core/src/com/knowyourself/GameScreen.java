@@ -14,11 +14,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
 import com.knowyourself.utils.AssetFinder;
 import com.knowyourself.utils.ImageWindow;
+import com.knowyourself.utils.Text;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class GameScreen extends GeneralScreens {
 
+    private ArrayList<Dialogue> listofDialogue;
+    private HashSet<Dialogue> setofDialogues;
     private AssetManager assets;
     public GameScreen(Game game) {
         super(game);
@@ -28,7 +34,18 @@ public class GameScreen extends GeneralScreens {
         assetFinder.load();
         assets.finishLoading();
 
+        listofDialogue = new ArrayList<Dialogue>();
+        setofDialogues = new HashSet<Dialogue>();
+        String unparsed[] = assets.get( Constants.textDirectory+Constants.A1, Text.class ).getString().split("\n");
+        for(String upar: unparsed) {
+            if(upar.contains("{sel:")) {
 
+            } else {
+                Dialogue d = Dialogue.dialogueParser(upar);
+                listofDialogue.add(d);
+                setofDialogues.add(d);
+            }
+        }
     }
 
     @Override
@@ -49,7 +66,7 @@ public class GameScreen extends GeneralScreens {
 
 //        stage.addActor(new TestTextAreaAndScroll());
         DialogueTextPlane dtp = new DialogueTextPlane("", viewport);
-        ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get("Characters/Player.jpg", Texture.class))));
+        ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+Constants.Player, Texture.class))));
         iw.setPosition(0, viewport.getScreenHeight()/5);
         stage.addActor(dtp);
         stage.addActor(iw);
