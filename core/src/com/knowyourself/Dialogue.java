@@ -1,13 +1,14 @@
 package com.knowyourself;
 
 public class Dialogue{
-    private int id;
+    private int id, next;
     private String speaker, spokenTo, content;
-    public Dialogue(int id, String speaker, String spokenTo, String content) {
+    public Dialogue(int id, String speaker, String spokenTo, String content, int nextLine) {
         this.id = id;
         this.speaker = speaker;
         this.spokenTo = spokenTo;
         this.content = content;
+        next = nextLine;
     }
 
     @Override
@@ -41,5 +42,26 @@ public class Dialogue{
 
     public String getContent() {
         return content;
+    }
+
+    public static Dialogue dalogueParser(String line) {
+        String[] bracketSections = line.split("}");
+        String[] contentSections = bracketSections[bracketSections.length - 1].split("|");
+        int nextLine = -1;
+        if(bracketSections.length > 2) {
+            int count = 0;
+            for(String s: bracketSections) {
+                if(count == 0 || count == bracketSections.length -1)
+                    continue;
+
+                if(s.contains("{t:")) {
+                    String[] ss = s.split("{t:");
+                    nextLine = Integer.valueOf(ss[ss.length-1]);
+                }
+
+                count ++;
+            }
+        }
+        return new Dialogue(Integer.valueOf(bracketSections[0]), contentSections[0], contentSections[1], contentSections[3], nextLine);
     }
 }

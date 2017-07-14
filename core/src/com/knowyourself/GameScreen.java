@@ -27,6 +27,8 @@ public class GameScreen extends GeneralScreens {
         AssetFinder assetFinder = new AssetFinder(assets, resolver);
         assetFinder.load();
         assets.finishLoading();
+
+
     }
 
     @Override
