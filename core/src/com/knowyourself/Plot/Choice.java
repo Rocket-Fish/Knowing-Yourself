@@ -16,6 +16,18 @@ public class Choice{
         }
     }
 
+    public int getNextLine() {
+        return afterLine;
+    }
+
+    public int[] getDialoguesToTransferTo() {
+        return DialoguesToTransferTo;
+    }
+
+    public ArrayList<String> getChoiceDisplay() {
+        return choiceDisplay;
+    }
+
     public static Choice choiceParser(int afterLine, String line) {
         int location = line.indexOf("[sel:");
         int selNumber = Integer.valueOf(line.charAt(location + 5)+"");
@@ -30,7 +42,7 @@ public class Choice{
                 continue;
             }
             String[] secondarySelection = str.split("]");
-            transfer[count] = Integer.valueOf(secondarySelection[0]);
+            transfer[count++] = Integer.valueOf(secondarySelection[0]);
             choiceDisplay.add(secondarySelection[1]);
         }
 

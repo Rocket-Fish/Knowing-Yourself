@@ -26,7 +26,6 @@ public class GameScreen extends GeneralScreens {
 
     private ArrayList<Choice> plotChoices;
     private ArrayList<Dialogue> listofDialogues;
-    private HashSet<Dialogue> setofDialogues;
     private AssetManager assets;
     public GameScreen(Game game) {
         super(game);
@@ -38,7 +37,6 @@ public class GameScreen extends GeneralScreens {
 
         plotChoices = new ArrayList<Choice>();
         listofDialogues = new ArrayList<Dialogue>();
-        setofDialogues = new HashSet<Dialogue>();
         String unparsed[] = assets.get( Constants.textDirectory+Constants.A1, Text.class ).getString().split("\n");
         int prevLine = -1;
         for(String upar: unparsed) {
@@ -48,7 +46,6 @@ public class GameScreen extends GeneralScreens {
             } else {
                 Dialogue d = Dialogue.dialogueParser(upar);
                 listofDialogues.add(d);
-                setofDialogues.add(d);
                 prevLine = d.getId();
             }
         }
@@ -113,7 +110,7 @@ public class GameScreen extends GeneralScreens {
         });
 
         // This needs to be at the very very end.
-        PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues, setofDialogues);
+        PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues);
         dtp.setClickCallBack(manager);
     }
 

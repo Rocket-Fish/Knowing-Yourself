@@ -44,6 +44,10 @@ public class Dialogue{
         return content;
     }
 
+    public int getNextLine() {
+        return next;
+    }
+
     public static Dialogue dialogueParser(String line) {
         String[] bracketSections = line.split("]");
         String[] contentSections = bracketSections[bracketSections.length - 1].split("`");
@@ -51,11 +55,13 @@ public class Dialogue{
         if(bracketSections.length > 2) {
             int count = 0;
             for(String s: bracketSections) {
-                if(count == 0 || count == bracketSections.length -1)
+                if(count == 0 || count == bracketSections.length-1) {
+                    count++;
                     continue;
+                }
 
-                if(s.contains("\\[t:")) {
-                    String[] ss = s.split("\\[t:");
+                if(s.contains("[t:")) {
+                    String[] ss = s.split("t:");
                     nextLine = Integer.valueOf(ss[ss.length-1]);
                 }
 
