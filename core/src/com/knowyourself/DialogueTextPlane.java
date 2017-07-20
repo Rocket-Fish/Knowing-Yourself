@@ -1,22 +1,32 @@
 package com.knowyourself;
 
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.knowyourself.utils.ImageWindow;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisWindow;
 
-import java.util.ArrayList;
-
 public class DialogueTextPlane extends VisWindow {
-    Viewport vpReference;
-    ScrollableTextArea textArea;
-    ArrayList<Dialogue> dialogues;
+    private Viewport vpReference;
+    private ScrollableTextArea textArea;
+    private ImageWindow speaker, spokenTo;
+    private AssetManager assets;
+
+    ////////////////////////////////
+    //////////////////////////////// Important... Must Initialize These for the text plane to function properly
+    ////////////////////////////////
+    ////////////////////////////////
+
 
     public DialogueTextPlane(String title, Viewport viewport) {
         super(title, false);
@@ -38,25 +48,41 @@ public class DialogueTextPlane extends VisWindow {
             }
         });
     }
+    private DialogueOnClickCallback callback;
+    public void setClickCallBack(DialogueOnClickCallback d) {
+        callback = d;
+    }
 
-    public void setDialogues(ArrayList<Dialogue> dialogues) {
-        this.dialogues = dialogues;
+    public void attachImageWindows(ImageWindow speaker, ImageWindow spokenTo, AssetManager assets) {
+        this.speaker = speaker;
+        this.spokenTo = spokenTo;
+        this.assets = assets;
+    }
+
+    ////////////////////////////////
+    ////////////////////////////////
+    ////////////////////////////////
+    ////////////////////////////////
+
+
+    public void setTitle(String title) {
+        this.getTitleLabel().setText(title);
     }
 
     public void setText(String str) {
         textArea.setText(str);
     }
 
-    public void updateSize() {
-        setSize(vpReference.getScreenWidth(), vpReference.getScreenHeight() / 5);
+    public void setSpeakerImage(String dir) {
+        speaker.setImage(new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
     }
 
-    private int nextTextNum = 0;
+    public void setSpokenToImage(String dir) {
+        spokenTo.setImage(new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
+    }
 
-    public void showNextText() {
-        if (dialogues != null) {
-            setText(dialogues.get(nextTextNum++).getContent());
-        }
+    public void updateSize() {
+        setSize(vpReference.getScreenWidth(), vpReference.getScreenHeight() / 5);
     }
 
     private void addVisWidgets() {
@@ -66,7 +92,6 @@ public class DialogueTextPlane extends VisWindow {
         // make text uneditable by clearing the listeners
 //        textArea.clearListeners();
         // add a click listener
-
 
         VisTable table = new VisTable();
 
@@ -104,7 +129,8 @@ public class DialogueTextPlane extends VisWindow {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 //                super.clicked(event, x, y);
-                showNextText();
+                if(callback != null)
+                    callback.onClick();
             }
 
             @Override
@@ -119,6 +145,8 @@ public class DialogueTextPlane extends VisWindow {
         }
     }
 
-
+    public interface DialogueOnClickCallback{
+        void onClick();
+    }
 
 }

@@ -6,12 +6,13 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
+import com.knowyourself.Plot.Choice;
+import com.knowyourself.Plot.Dialogue;
+import com.knowyourself.Plot.PlotManager;
 import com.knowyourself.utils.AssetFinder;
 import com.knowyourself.utils.ImageWindow;
 import com.knowyourself.utils.Text;
@@ -23,7 +24,8 @@ import java.util.HashSet;
 
 public class GameScreen extends GeneralScreens {
 
-    private ArrayList<Dialogue> listofDialogue;
+    private ArrayList<Choice> plotChoices;
+    private ArrayList<Dialogue> listofDialogues;
     private HashSet<Dialogue> setofDialogues;
     private AssetManager assets;
     public GameScreen(Game game) {
@@ -34,16 +36,20 @@ public class GameScreen extends GeneralScreens {
         assetFinder.load();
         assets.finishLoading();
 
-        listofDialogue = new ArrayList<Dialogue>();
+        plotChoices = new ArrayList<Choice>();
+        listofDialogues = new ArrayList<Dialogue>();
         setofDialogues = new HashSet<Dialogue>();
         String unparsed[] = assets.get( Constants.textDirectory+Constants.A1, Text.class ).getString().split("\n");
+        int prevLine = -1;
         for(String upar: unparsed) {
-            if(upar.contains("{sel:")) {
-
+            if(upar.contains("[sel:")) {
+                Choice c = Choice.choiceParser(prevLine, upar);
+                plotChoices.add(c);
             } else {
                 Dialogue d = Dialogue.dialogueParser(upar);
-                listofDialogue.add(d);
+                listofDialogues.add(d);
                 setofDialogues.add(d);
+                prevLine = d.getId();
             }
         }
     }
@@ -66,11 +72,24 @@ public class GameScreen extends GeneralScreens {
 
 //        stage.addActor(new TestTextAreaAndScroll());
         DialogueTextPlane dtp = new DialogueTextPlane("", viewport);
-        dtp.setDialogues(listofDialogue);
-        ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+Constants.Player, Texture.class))));
+
+        ImageWindow iw = new ImageWindow(Color.WHITE);
+//        ImageWindow iw = new ImageWindow(
         iw.setPosition(0, viewport.getScreenHeight()/5);
+        iw.setWidth(viewport.getScreenHeight()/2);
+        iw.setHeight(viewport.getScreenHeight()/2);
+
+        ImageWindow iw2 = new ImageWindow(Color.WHITE);
+        iw2.setPosition(viewport.getScreenWidth()-viewport.getScreenHeight()/2, viewport.getScreenHeight()/5);
+        iw2.setWidth(viewport.getScreenHeight()/2);
+        iw2.setHeight(viewport.getScreenHeight()/2);
+
+        dtp.attachImageWindows(iw, iw2, assets);
+
+
         stage.addActor(dtp);
         stage.addActor(iw);
+        stage.addActor(iw2);
 
         stage.addListener(new InputListener() {
             boolean debug = false;
@@ -93,6 +112,9 @@ public class GameScreen extends GeneralScreens {
             }
         });
 
+        // This needs to be at the very very end.
+        PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues, setofDialogues);
+        dtp.setClickCallBack(manager);
     }
 
     @Override

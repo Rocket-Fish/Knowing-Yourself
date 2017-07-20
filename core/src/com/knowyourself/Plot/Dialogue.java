@@ -1,4 +1,4 @@
-package com.knowyourself;
+package com.knowyourself.Plot;
 
 public class Dialogue{
     private int id, next;
@@ -45,7 +45,7 @@ public class Dialogue{
     }
 
     public static Dialogue dialogueParser(String line) {
-        String[] bracketSections = line.split("}");
+        String[] bracketSections = line.split("]");
         String[] contentSections = bracketSections[bracketSections.length - 1].split("`");
         int nextLine = -1;
         if(bracketSections.length > 2) {
@@ -54,8 +54,8 @@ public class Dialogue{
                 if(count == 0 || count == bracketSections.length -1)
                     continue;
 
-                if(s.contains("{t:")) {
-                    String[] ss = s.split("{t:");
+                if(s.contains("\\[t:")) {
+                    String[] ss = s.split("\\[t:");
                     nextLine = Integer.valueOf(ss[ss.length-1]);
                 }
 
