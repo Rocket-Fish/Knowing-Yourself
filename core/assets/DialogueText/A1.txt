@@ -1,0 +1,20 @@
+1]Fornea`Player`This is an ordinary morning. You wake up at 7:20 and slip on your coat. Your foster fathers, Lawrence and Sol, are waiting for you just outside your room. Sol has his favourite grimace on. Sol used to be a military man, until he adopted you and ran away with Lawrence. Now your family hides in the small village of Fallow. The situation makes Sol grim for most of his days. Lawrence stays optimistic, at least outwardly. Sol is the one that greets you.
+2]Sol`Player`You're up.
+[sel:3][3]Of Course[4]I'm feeling good[5] I'm tired
+3][t:6]Player`Sol`I'm always up at this time.
+4][t:6]Player`Sol`The air's a little bracing, but I'm feeling up to the day.
+5]Player`Sol`I didn't get much sleep. Woke up in the middle of the night.
+7]Lawrence`Player`Were you having nightmares again?
+8][t:9]Sol`Player`It doesn't matter. You're supposed to pick up the new arrival at the inn.
+6]Lawrence`Player`Good, because you're supposed to pick up a new arrival at the inn this morning.
+9]Lawrence`Player`His name is Mikhail. Do you remember? He's going to take over as steward of Castle Fallow. Tristan's getting too old.
+10]Sol`Player`Mikhail's a monk. Don't bother him. 
+[sel:3][11]I won't[12]Whatever[13]I'll try not to
+11][t:14]Player`Sol`Of course, father.
+12][t:15]Player`Sol`I'll do what I want. Don't worry about it.
+13]Player`Sol`I'll try to be nice. It would be nice to have a friend here to talk to.
+16]Lawrence`Player`We'd just prefer you not bring any friends around here. We like our privacy.
+18][t:17]Sol`Player`This is a quiet town. We like it that way. Don't worry too much about the monk. I'm sure he'll be friendly.
+15][t:17]Sol`Player`Don't antagonize him. Last thing we need is for some monk to come telling us how to raise a child.
+14]Lawrence`Player`That's my girl. Be on your way. I'm sure he's waiting.
+17]Lawrence`Player`Quickly now. Good luck!

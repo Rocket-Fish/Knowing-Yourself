@@ -6,7 +6,9 @@
 hs_err_pid*
 
 ## Custom
-/core/assets/
+/core/assets/*
+!DialogueText/
+
 /out/
 
 ## Robovm
