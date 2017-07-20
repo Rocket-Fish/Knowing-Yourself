@@ -46,7 +46,7 @@ public class Dialogue{
 
     public static Dialogue dialogueParser(String line) {
         String[] bracketSections = line.split("}");
-        String[] contentSections = bracketSections[bracketSections.length - 1].split("|");
+        String[] contentSections = bracketSections[bracketSections.length - 1].split("`");
         int nextLine = -1;
         if(bracketSections.length > 2) {
             int count = 0;
@@ -62,6 +62,6 @@ public class Dialogue{
                 count ++;
             }
         }
-        return new Dialogue(Integer.valueOf(bracketSections[0]), contentSections[0], contentSections[1], contentSections[3], nextLine);
+        return new Dialogue(Integer.valueOf(bracketSections[0]), contentSections[0], contentSections[1], contentSections[2], nextLine);
     }
 }
