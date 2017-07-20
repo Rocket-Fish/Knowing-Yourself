@@ -8,18 +8,19 @@ public class Constants {
     public static String A1 = "A1.txt";
     public static String charDirectory = "Characters/";
     public static String
-            badlogic = "badlogic.jpg",
-            Daelin = "Daelin.jpg",
-            Lawrence = "Lawrence.jpg",
-            Lawrence_undead = "Lawrence_undead.jpg",
-            Mikhail = "Mikhail.jpg",
-            Mikhail_undead = "Mikhail_undead.jpg",
-            Naomi = "Naomi.jpg",
-            Player = "Player.jpg",
-            Sariel = "Sariel.jpg",
-            Sol = "Sol.jpg",
-            Torrent = "Torrent.jpg",
-            Tristan = "Tristan.jpg";
+            blank = "Blank.png",
+            badlogic = "badlogic.PNG",
+            Daelin = "Daelin.PNG",
+            Lawrence = "Lawrence.PNG",
+            Lawrence_undead = "Lawrence_undead.PNG",
+            Mikhail = "Mikhail.PNG",
+            Mikhail_undead = "Mikhail_undead.PNG",
+            Naomi = "Naomi.PNG",
+            Player = "Player.PNG",
+            Sariel = "Sariel.PNG",
+            Sol = "Sol.PNG",
+            Torrent = "Torrent.PNG",
+            Tristan = "Tristan.PNG";
     public static String soundDirectory = "Dialogues/";
     public static String
             A1_1 = "A1 (1).mp3",

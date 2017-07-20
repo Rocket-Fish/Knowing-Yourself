@@ -6,9 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
 import com.knowyourself.Plot.Choice;
 import com.knowyourself.Plot.Dialogue;
@@ -18,9 +20,9 @@ import com.knowyourself.utils.ImageWindow;
 import com.knowyourself.utils.Text;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.PopupMenu;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class GameScreen extends GeneralScreens {
 
@@ -29,6 +31,7 @@ public class GameScreen extends GeneralScreens {
     private AssetManager assets;
     public GameScreen(Game game) {
         super(game);
+        setBackgroundColor(255, 255, 255, 1);
         FileHandleResolver resolver = new InternalFileHandleResolver();
         assets = new AssetManager(resolver);
         AssetFinder assetFinder = new AssetFinder(assets, resolver);
@@ -70,13 +73,13 @@ public class GameScreen extends GeneralScreens {
 //        stage.addActor(new TestTextAreaAndScroll());
         DialogueTextPlane dtp = new DialogueTextPlane("", viewport);
 
-        ImageWindow iw = new ImageWindow(Color.WHITE);
+        ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+ Constants.blank, Texture.class))));
 //        ImageWindow iw = new ImageWindow(
         iw.setPosition(0, viewport.getScreenHeight()/5);
         iw.setWidth(viewport.getScreenHeight()/2);
         iw.setHeight(viewport.getScreenHeight()/2);
 
-        ImageWindow iw2 = new ImageWindow(Color.WHITE);
+        ImageWindow iw2 = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+Constants.blank, Texture.class))));
         iw2.setPosition(viewport.getScreenWidth()-viewport.getScreenHeight()/2, viewport.getScreenHeight()/5);
         iw2.setWidth(viewport.getScreenHeight()/2);
         iw2.setHeight(viewport.getScreenHeight()/2);
