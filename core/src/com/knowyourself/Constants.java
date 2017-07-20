@@ -4,6 +4,10 @@ package com.knowyourself;
  * just going to use it to list all the file names.
  */
 public class Constants {
+    public static String
+            logo1 = "Bearfish.png",
+            logo2 = "RocketFish.png";
+
     public static String textDirectory = "DialogueText/";
     public static String A1 = "A1.txt";
     public static String charDirectory = "Characters/";

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.knowyourself.Constants;
-import com.knowyourself.DialogueTextPlane;
+import com.knowyourself.UI.DialogueTextPlane;
 import com.knowyourself.utils.ImageWindow;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
@@ -104,7 +104,7 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
                 Integer[] whatever = Arrays.stream( c.getDialoguesToTransferTo() ).boxed().toArray( Integer[]::new );
 
                 //confirmdialog may return result of any type, here we are just using ints
-                Dialogs.showConfirmDialog(dialogueTextPlane.getStage(), "confirm dialog", "what do you want?",
+                Dialogs.showConfirmDialog(dialogueTextPlane.getStage(), "", "what do you say?",
                         choices, whatever,
                         new ConfirmDialogListener<Integer>() {
                             @Override
@@ -146,13 +146,15 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         try {
             if(speaking.equals("Player")) {
                 for(int ps:playerSide) {
-                    if(setImageWindowImage(imageWindows[ps], Constants.charDirectory+speakingCharacter))
+                    if(setImageWindowImage(imageWindows[ps], Constants.charDirectory+speakingCharacter)) {
                         break;
+                    }
                 }
             } else {
                 for(int npcs: npcSide) {
-                    if(setImageWindowImage(imageWindows[npcs], Constants.charDirectory+speakingCharacter))
+                    if(setImageWindowImage(imageWindows[npcs], Constants.charDirectory+speakingCharacter)) {
                         break;
+                    }
                 }
             }
             if(spokenTo.equals("Player")) {

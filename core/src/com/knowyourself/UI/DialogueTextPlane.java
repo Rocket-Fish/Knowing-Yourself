@@ -1,4 +1,4 @@
-package com.knowyourself;
+package com.knowyourself.UI;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -39,8 +39,8 @@ public class DialogueTextPlane extends VisWindow {
             }
         });
 
-        // TODO: test
-        this.getTitleTable().right();
+//        this.getTitleTable().padRight(30).padLeft(30);
+
     }
     private DialogueOnClickCallback callback;
     public void setClickCallBack(DialogueOnClickCallback d) {
@@ -83,7 +83,7 @@ public class DialogueTextPlane extends VisWindow {
         // ---
 
         add(textArea.createCompatibleScrollPane()).growX().growY().row();
-        add(scrollPane).spaceTop(1).spaceBottom(1).growX().growY().row();
+        add(scrollPane).spaceTop(1).growX().fillY().row();
     }
 
     public class CustomScrollableTextArea extends ScrollableTextArea {
@@ -129,6 +129,5 @@ public class DialogueTextPlane extends VisWindow {
     public interface DialogueOnClickCallback{
         void onClick();
     }
-
 
 }

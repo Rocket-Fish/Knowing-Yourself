@@ -1,21 +1,19 @@
-package com.knowyourself;
+package com.knowyourself.UI;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
+import com.knowyourself.Constants;
 import com.knowyourself.Plot.Choice;
 import com.knowyourself.Plot.Dialogue;
 import com.knowyourself.Plot.PlotManager;
-import com.knowyourself.utils.AssetFinder;
 import com.knowyourself.utils.ImageWindow;
 import com.knowyourself.utils.Text;
 import com.kotcrab.vis.ui.VisUI;
@@ -27,14 +25,9 @@ public class GameScreen extends GeneralScreens {
 
     private ArrayList<Choice> plotChoices;
     private ArrayList<Dialogue> listofDialogues;
-    private AssetManager assets;
-    public GameScreen(Game game) {
-        super(game);
+    public GameScreen(AssetManager assets, Game game) {
+        super(assets, game);
         setBackgroundColor(255, 255, 255, 1);
-        FileHandleResolver resolver = new InternalFileHandleResolver();
-        assets = new AssetManager(resolver);
-        AssetFinder assetFinder = new AssetFinder(assets, resolver);
-        assetFinder.load();
         assets.finishLoading();
 
         plotChoices = new ArrayList<Choice>();

@@ -1,6 +1,7 @@
 package com.knowyourself.TestingPackage;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -17,8 +18,8 @@ import com.kotcrab.vis.ui.widget.PopupMenu;
 
 public class ScreenTesting extends GeneralScreens {
     MenuBar menuBar;
-    public ScreenTesting(Game game) {
-        super(game);
+    public ScreenTesting(AssetManager am, Game game) {
+        super(am, game);
     }
 
     @Override
