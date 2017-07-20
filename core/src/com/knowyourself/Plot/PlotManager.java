@@ -1,9 +1,14 @@
 package com.knowyourself.Plot;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.knowyourself.Constants;
 import com.knowyourself.DialogueTextPlane;
+import com.knowyourself.utils.ImageWindow;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 
@@ -15,6 +20,8 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
     private DialogueTextPlane dialogueTextPlane;
     private ArrayList<Choice> plotChoices;
     private ArrayList<Dialogue> listofDialogues;
+    private ImageWindow[] imageWindows;
+    private AssetManager assets;
 
     public PlotManager(DialogueTextPlane dialogueTextPlane, ArrayList<Choice> plotChoices, ArrayList<Dialogue> listofDialogues) {
         this.dialogueTextPlane = dialogueTextPlane;
@@ -68,22 +75,10 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
             Dialogue d = listofDialogues.get(nextTextNum++);
             currentLineID = d.getId();
 
-            String speakingCharacter ="", characterBeingSpokenTo="";
-            speakingCharacter = whichCharacterIsThis(d.getSpeaker());
-            characterBeingSpokenTo = whichCharacterIsThis(d.getSpokenTo());
-
-            try {
-                dialogueTextPlane.setSpeakerImage(Constants.charDirectory + speakingCharacter);
-            } catch (GdxRuntimeException e) {
-                Gdx.app.log("Error", d.getSpeaker() + " | Image Doesn't Exist");
-            }
-            try {
-                dialogueTextPlane.setSpokenToImage(Constants.charDirectory+characterBeingSpokenTo);
-            } catch (GdxRuntimeException e) {
-                Gdx.app.log("Error", d.getSpokenTo() + " | Image Doesn't Exist");
-            }
             dialogueTextPlane.setTitle(d.getSpeaker());
             dialogueTextPlane.setText(d.getContent());
+
+            highlightPeople(d.getSpeaker(), d.getSpokenTo());
 
             if(d.getNextLine() != -1) {
                 targettedNextLine = d.getNextLine();
@@ -126,4 +121,63 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         if(!doNotDisplay)
             showNextDialogue();
     }
+
+    public void attachImageWindows(ImageWindow[] windows, AssetManager assets) {
+        imageWindows = windows;
+        this.assets = assets;
+    }
+
+    private void highlightPeople(String speaking, String spokenTo) {
+        final int []playerSide = {0, 1, 2};
+        final int []npcSide = {3, 4, 5};
+
+        if(speaking.equals("Fornea") || spokenTo.equals("Fornea")) {
+            return;
+        }
+
+        String speakingCharacter ="", characterBeingSpokenTo="";
+        speakingCharacter = whichCharacterIsThis(speaking);
+        characterBeingSpokenTo = whichCharacterIsThis(spokenTo);
+
+        for(ImageWindow iw: imageWindows) {
+            iw.setFaded();
+        }
+
+        try {
+            if(speaking.equals("Player")) {
+                for(int ps:playerSide) {
+                    if(setImageWindowImage(imageWindows[ps], Constants.charDirectory+speakingCharacter))
+                        break;
+                }
+            } else {
+                for(int npcs: npcSide) {
+                    if(setImageWindowImage(imageWindows[npcs], Constants.charDirectory+speakingCharacter))
+                        break;
+                }
+            }
+            if(spokenTo.equals("Player")) {
+                for(int ps:playerSide) {
+                    if(setImageWindowImage(imageWindows[ps], Constants.charDirectory+characterBeingSpokenTo))
+                        break;
+                }
+            } else {
+                for(int npcs: npcSide) {
+                    if(setImageWindowImage(imageWindows[npcs], Constants.charDirectory+characterBeingSpokenTo))
+                        break;
+                }
+            }
+        } catch (GdxRuntimeException e) {
+            Gdx.app.log("Error", " Speaker or Listener | Image Doesn't Exist");
+        }
+    }
+
+    public boolean setImageWindowImage(ImageWindow iw, String dir) {
+        if(iw.isCurrentlyBlank() || iw.getImagePath().equals(dir)) {
+            iw.changeImage(dir, new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
+            iw.setNonFaded();
+            return true;
+        }
+        return false;
+    }
+
 }

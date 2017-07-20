@@ -1,15 +1,8 @@
 package com.knowyourself;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.knowyourself.utils.ImageWindow;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.ScrollableTextArea;
 import com.kotcrab.vis.ui.widget.VisScrollPane;
@@ -19,8 +12,6 @@ import com.kotcrab.vis.ui.widget.VisWindow;
 public class DialogueTextPlane extends VisWindow {
     private Viewport vpReference;
     private ScrollableTextArea textArea;
-    private ImageWindow speaker, spokenTo;
-    private AssetManager assets;
 
     ////////////////////////////////
     //////////////////////////////// Important... Must Initialize These for the text plane to function properly
@@ -47,17 +38,15 @@ public class DialogueTextPlane extends VisWindow {
                 updateSize();
             }
         });
+
+        // TODO: test
+        this.getTitleTable().right();
     }
     private DialogueOnClickCallback callback;
     public void setClickCallBack(DialogueOnClickCallback d) {
         callback = d;
     }
 
-    public void attachImageWindows(ImageWindow speaker, ImageWindow spokenTo, AssetManager assets) {
-        this.speaker = speaker;
-        this.spokenTo = spokenTo;
-        this.assets = assets;
-    }
 
     ////////////////////////////////
     ////////////////////////////////
@@ -73,14 +62,6 @@ public class DialogueTextPlane extends VisWindow {
         textArea.setText(str);
     }
 
-    public void setSpeakerImage(String dir) {
-        speaker.setImage(new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
-    }
-
-    public void setSpokenToImage(String dir) {
-        spokenTo.setImage(new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
-    }
-
     public void updateSize() {
         setSize(vpReference.getScreenWidth(), vpReference.getScreenHeight() / 5);
     }
@@ -88,7 +69,7 @@ public class DialogueTextPlane extends VisWindow {
     private void addVisWidgets() {
         textArea = new CustomScrollableTextArea("...");
 
-        Array<EventListener> listeners = textArea.getListeners();
+//        Array<EventListener> listeners = textArea.getListeners();
         // make text uneditable by clearing the listeners
 //        textArea.clearListeners();
         // add a click listener
@@ -102,7 +83,7 @@ public class DialogueTextPlane extends VisWindow {
         // ---
 
         add(textArea.createCompatibleScrollPane()).growX().growY().row();
-        add(scrollPane).spaceTop(8).growX().growY().row();
+        add(scrollPane).spaceTop(1).spaceBottom(1).growX().growY().row();
     }
 
     public class CustomScrollableTextArea extends ScrollableTextArea {
@@ -148,5 +129,6 @@ public class DialogueTextPlane extends VisWindow {
     public interface DialogueOnClickCallback{
         void onClick();
     }
+
 
 }

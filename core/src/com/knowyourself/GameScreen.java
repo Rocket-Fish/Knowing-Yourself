@@ -20,7 +20,6 @@ import com.knowyourself.utils.ImageWindow;
 import com.knowyourself.utils.Text;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.PopupMenu;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.util.ArrayList;
 
@@ -64,6 +63,41 @@ public class GameScreen extends GeneralScreens {
 
     }
 
+    private ImageWindow createBlankWindow(int position) {
+        ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+ Constants.blank, Texture.class))));
+        int width = viewport.getScreenHeight()/2;
+        iw.setWidth(width);
+        iw.setHeight(width);
+
+        int x;
+        int pos1 = viewport.getScreenWidth()/4-width/2, pos2 = viewport.getScreenWidth()/4*3-width/2, variance = viewport.getScreenWidth()/12;
+
+        switch (position) {
+            default:
+                x = pos1;
+                break;
+            case 1:
+                x = pos1-variance;
+                break;
+            case 2:
+                x = pos1+variance/3*2;
+                break;
+            case 3:
+                x = pos2;
+                break;
+            case 4:
+                x = pos2+variance;
+                break;
+            case 5:
+                x = pos2-variance/3*2;
+                break;
+        }
+
+        iw.setPosition(x, viewport.getScreenHeight()/5);
+
+        return iw;
+    }
+
     @Override
     public void preShow(final Table table, InputMultiplexer multiplexer) {
         VisUI.load(VisUI.SkinScale.X1);
@@ -73,23 +107,16 @@ public class GameScreen extends GeneralScreens {
 //        stage.addActor(new TestTextAreaAndScroll());
         DialogueTextPlane dtp = new DialogueTextPlane("", viewport);
 
-        ImageWindow iw = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+ Constants.blank, Texture.class))));
-//        ImageWindow iw = new ImageWindow(
-        iw.setPosition(0, viewport.getScreenHeight()/5);
-        iw.setWidth(viewport.getScreenHeight()/2);
-        iw.setHeight(viewport.getScreenHeight()/2);
+        ImageWindow[] iw = {createBlankWindow(0),createBlankWindow(1),createBlankWindow(2),createBlankWindow(3),createBlankWindow(4),createBlankWindow(5)};
 
-        ImageWindow iw2 = new ImageWindow(new TextureRegionDrawable(new TextureRegion(assets.get(Constants.charDirectory+Constants.blank, Texture.class))));
-        iw2.setPosition(viewport.getScreenWidth()-viewport.getScreenHeight()/2, viewport.getScreenHeight()/5);
-        iw2.setWidth(viewport.getScreenHeight()/2);
-        iw2.setHeight(viewport.getScreenHeight()/2);
-
-        dtp.attachImageWindows(iw, iw2, assets);
-
+        PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues);
+        dtp.setClickCallBack(manager);
+        manager.attachImageWindows(iw, assets);
 
         stage.addActor(dtp);
-        stage.addActor(iw);
-        stage.addActor(iw2);
+        for(ImageWindow i: iw) {
+            stage.addActor(i);
+        }
 
         stage.addListener(new InputListener() {
             boolean debug = false;
@@ -112,9 +139,6 @@ public class GameScreen extends GeneralScreens {
             }
         });
 
-        // This needs to be at the very very end.
-        PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues);
-        dtp.setClickCallBack(manager);
     }
 
     @Override
