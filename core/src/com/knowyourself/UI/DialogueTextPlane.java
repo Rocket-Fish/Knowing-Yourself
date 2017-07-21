@@ -1,9 +1,11 @@
 package com.knowyourself.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -74,17 +76,27 @@ public class DialogueTextPlane extends VisWindow {
     private void addVisWidgets() {
         textArea = new CustomScrollableTextArea("...");
 
-        // Change Text Area Font
+        Color grey = new Color(Color.GRAY);
+        grey.a = 0.1f;
+        // Change Text Area style
         VisTextField.VisTextFieldStyle style = textArea.getStyle();
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("CasablancaAntique.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 16;
         BitmapFont cas16  = generator.generateFont(parameter);
         style.font = cas16;
-        // Change speaker Title Font
+        style.fontColor = Color.WHITE;
+//        style.background = new ColoredDrawable(grey);
+        // Change speaker Title style
         Label.LabelStyle lStyle = this.getTitleLabel().getStyle();
         lStyle.font = cas16;
+        lStyle.font.setColor(Color.WHITE);
+//        lStyle.background = new ColoredDrawable(grey);
         getTitleLabel().setStyle(lStyle);
+        // change background's background style
+//        WindowStyle wStyle = this.getStyle();
+//        wStyle.background = new ColoredDrawable(grey);
+//        setStyle(wStyle);
 
 //        Array<EventListener> listeners = textArea.getListeners();
         // make text uneditable by clearing the listeners
@@ -145,6 +157,85 @@ public class DialogueTextPlane extends VisWindow {
             public boolean keyTyped(InputEvent event, char character) {
                 return false;
             }
+        }
+    }
+
+    public class ColoredDrawable implements Drawable{
+        private ShapeRenderer renderer;
+        private Color desiredColor;
+        public ColoredDrawable(Color dc) {
+            renderer = new ShapeRenderer();
+            desiredColor = dc;
+        }
+        @Override
+        public void draw(Batch batch, float x, float y, float width, float height) {
+            renderer.setProjectionMatrix(batch.getProjectionMatrix());
+            batch.end();
+            renderer.begin(ShapeRenderer.ShapeType.Filled);
+            renderer.setColor(desiredColor);
+            renderer.rect(x, y, width, height);
+            renderer.end();
+            batch.begin();
+        }
+
+        @Override
+        public float getLeftWidth() {
+            return 0;
+        }
+
+        @Override
+        public void setLeftWidth(float leftWidth) {
+
+        }
+
+        @Override
+        public float getRightWidth() {
+            return 0;
+        }
+
+        @Override
+        public void setRightWidth(float rightWidth) {
+
+        }
+
+        @Override
+        public float getTopHeight() {
+            return 0;
+        }
+
+        @Override
+        public void setTopHeight(float topHeight) {
+
+        }
+
+        @Override
+        public float getBottomHeight() {
+            return 0;
+        }
+
+        @Override
+        public void setBottomHeight(float bottomHeight) {
+
+        }
+
+        @Override
+        public float getMinWidth() {
+            return 0;
+        }
+
+        @Override
+        public void setMinWidth(float minWidth) {
+
+        }
+
+        @Override
+        public float getMinHeight() {
+            return 0;
+        }
+
+        @Override
+        public void setMinHeight(float minHeight) {
+
         }
     }
 

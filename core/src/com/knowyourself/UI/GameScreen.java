@@ -30,27 +30,6 @@ public class GameScreen extends GeneralScreens {
         super(assets, game);
 
         VisUI.load();
-        /*
-        TODO: Need to change the VisUI skin Font
-        Skin skin = VisUI.getSkin();
-        VisUI.dispose(true);
-
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("CasablancaAntique.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 14;
-
-        ObjectMap<String, Object> fontMap = new ObjectMap<String, Object>();
-        fontMap.put("default-font", generator.generateFont(parameter));
-        fontMap.put("small-font", generator.generateFont(parameter));
-
-        SkinLoader.SkinParameter par = new SkinLoader.SkinParameter(fontMap);
-
-        assets.load(VisUI.SkinScale.X1.getSkinFile().path(), Skin.class, par);
-        assets.finishLoading();
-
-        Skin skin = assets.get(VisUI.SkinScale.X1.getSkinFile().path());
-        VisUI.load(skin);
-*/
         setBackgroundColor(255, 255, 255, 1);
 
         plotChoices = new ArrayList<Choice>();
