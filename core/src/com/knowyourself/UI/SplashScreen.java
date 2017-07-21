@@ -8,6 +8,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -87,7 +88,7 @@ public class SplashScreen extends GeneralScreens {
             public void run() {
                 loading.setVisible(true);
             }
-        }), Actions.repeat(1000, Actions.sequence(Actions.fadeIn(1), Actions.fadeOut(1)))));
+        }), Actions.repeat(RepeatAction.FOREVER, Actions.sequence(Actions.fadeIn(1), Actions.fadeOut(1)))));
 
     }
 

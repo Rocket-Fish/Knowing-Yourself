@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
@@ -30,8 +29,10 @@ public class GameScreen extends GeneralScreens {
     public GameScreen(AssetManager assets, Game game) {
         super(assets, game);
 
-        Skin skin = VisUI.getSkin();
+        VisUI.load();
         /*
+        TODO: Need to change the VisUI skin Font
+        Skin skin = VisUI.getSkin();
         VisUI.dispose(true);
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("CasablancaAntique.ttf"));
@@ -50,7 +51,6 @@ public class GameScreen extends GeneralScreens {
         Skin skin = assets.get(VisUI.SkinScale.X1.getSkinFile().path());
         VisUI.load(skin);
 */
-        VisUI.load();
         setBackgroundColor(255, 255, 255, 1);
 
         plotChoices = new ArrayList<Choice>();

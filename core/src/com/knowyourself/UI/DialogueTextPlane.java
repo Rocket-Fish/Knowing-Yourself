@@ -1,13 +1,16 @@
 package com.knowyourself.UI;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.util.TableUtils;
-import com.kotcrab.vis.ui.widget.ScrollableTextArea;
-import com.kotcrab.vis.ui.widget.VisScrollPane;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.VisWindow;
+import com.kotcrab.vis.ui.widget.*;
 
 public class DialogueTextPlane extends VisWindow {
     private Viewport vpReference;
@@ -41,6 +44,8 @@ public class DialogueTextPlane extends VisWindow {
 
 //        this.getTitleTable().padRight(30).padLeft(30);
 
+
+
     }
     private DialogueOnClickCallback callback;
     public void setClickCallBack(DialogueOnClickCallback d) {
@@ -69,6 +74,18 @@ public class DialogueTextPlane extends VisWindow {
     private void addVisWidgets() {
         textArea = new CustomScrollableTextArea("...");
 
+        // Change Text Area Font
+        VisTextField.VisTextFieldStyle style = textArea.getStyle();
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("CasablancaAntique.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 16;
+        BitmapFont cas16  = generator.generateFont(parameter);
+        style.font = cas16;
+        // Change speaker Title Font
+        Label.LabelStyle lStyle = this.getTitleLabel().getStyle();
+        lStyle.font = cas16;
+        getTitleLabel().setStyle(lStyle);
+
 //        Array<EventListener> listeners = textArea.getListeners();
         // make text uneditable by clearing the listeners
 //        textArea.clearListeners();
@@ -89,6 +106,11 @@ public class DialogueTextPlane extends VisWindow {
     public class CustomScrollableTextArea extends ScrollableTextArea {
         public CustomScrollableTextArea(String text) {
             super(text);
+        }
+
+        @Override
+        protected void drawCursor(Drawable cursorPatch, Batch batch, BitmapFont font, float x, float y) {
+
         }
 
         @Override
