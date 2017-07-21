@@ -47,8 +47,8 @@ public class AssetFinder {
         );
 
         assets.add(new FolderAssetDescriptor("Characters", Texture.class));
-        assets.add(new FolderAssetDescriptor("Dialogues", Music.class));
         assets.add(new FolderAssetDescriptor("DialogueText", true));
+        assets.add(new FolderAssetDescriptor("Dialogues", Music.class));
     }
 
     public void load() {

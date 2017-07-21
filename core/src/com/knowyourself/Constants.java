@@ -6,7 +6,8 @@ package com.knowyourself;
 public class Constants {
     public static String
             logo1 = "Bearfish.png",
-            logo2 = "RocketFish.png";
+            logo2 = "RocketFish.png",
+            font = "CasablancaAntique.ttf";
 
     public static String textDirectory = "DialogueText/";
     public static String A1 = "A1.txt";

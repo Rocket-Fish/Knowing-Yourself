@@ -8,9 +8,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.knowyourself.Constants;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
 
@@ -60,13 +62,23 @@ public class DialogueTextPlane extends VisWindow {
     ////////////////////////////////
     ////////////////////////////////
 
-
+    private final float transitionTime = 0.2f;
     public void setTitle(String title) {
-        this.getTitleLabel().setText(title);
+        this.getTitleLabel().addAction(Actions.sequence(Actions.fadeOut(transitionTime), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                getTitleLabel().setText(title);
+            }
+        }) , Actions.fadeIn(transitionTime)));
     }
 
     public void setText(String str) {
-        textArea.setText(str);
+        this.textArea.addAction(Actions.sequence(Actions.fadeOut(transitionTime), Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                textArea.setText(str);
+            }
+        }) , Actions.fadeIn(transitionTime)));
     }
 
     public void updateSize() {
@@ -80,16 +92,16 @@ public class DialogueTextPlane extends VisWindow {
         grey.a = 0.1f;
         // Change Text Area style
         VisTextField.VisTextFieldStyle style = textArea.getStyle();
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("CasablancaAntique.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Constants.font));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 16;
-        BitmapFont cas16  = generator.generateFont(parameter);
-        style.font = cas16;
+        parameter.size = 20;
+        BitmapFont cas20  = generator.generateFont(parameter);
+        style.font = cas20;
         style.fontColor = Color.WHITE;
 //        style.background = new ColoredDrawable(grey);
         // Change speaker Title style
         Label.LabelStyle lStyle = this.getTitleLabel().getStyle();
-        lStyle.font = cas16;
+        lStyle.font = cas20;
         lStyle.font.setColor(Color.WHITE);
 //        lStyle.background = new ColoredDrawable(grey);
         getTitleLabel().setStyle(lStyle);

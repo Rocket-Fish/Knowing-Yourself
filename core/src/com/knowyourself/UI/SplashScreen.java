@@ -28,7 +28,6 @@ public class SplashScreen extends GeneralScreens {
         setBackgroundColor(255, 255, 255, 1);
 
         // Sorry this is terrible code
-        FontGenerator.generate(48, "CasablancaAntique.ttf");
         FileHandleResolver resolver = new InternalFileHandleResolver();
         assets = new AssetManager(resolver);
 
@@ -41,9 +40,11 @@ public class SplashScreen extends GeneralScreens {
 
     }
 
+    private boolean readyToTransition;
     @Override
     public void step(float delta, float animationKeyFrame) {
-        if (assets.update() && animationKeyFrame >= slashMinTime) {
+        assets.update();
+        if (assets.getProgress() > 0.5f && animationKeyFrame >= slashMinTime) {
             if(!isTransitioning) {
                 isTransitioning = true;
                 transition();
@@ -54,7 +55,7 @@ public class SplashScreen extends GeneralScreens {
     public void transition() {
         stage.addAction(Actions.sequence(Actions.fadeOut(0.5f), Actions.run(new Runnable() {
             public void run() {
-                game.setScreen(new GameScreen(assets, game));
+                game.setScreen(new MainMenuScreen(assets, game));
             }
         })));
     }
@@ -72,6 +73,7 @@ public class SplashScreen extends GeneralScreens {
         logo2.setScaling(Scaling.fit);
 
         // Sorry this is a sin in coding
+        FontGenerator.generate(48, Constants.font);
         CustomLabel.make(FontGenerator.returnFont(), Color.BLACK);
         Label loading = new Label("Loading...", CustomLabel.style);
         loading.setVisible(false);
