@@ -10,6 +10,7 @@ import java.util.TimerTask;
 
 public class ImageWindow extends VisWindow{
     private String imagePath = Constants.charDirectory+Constants.blank;
+    private boolean isCurrentlyFaded = true;
 
     public ImageWindow(Drawable background) {
         super("");
@@ -17,6 +18,10 @@ public class ImageWindow extends VisWindow{
 //        setColor(0, 1, 0, 0.5f);
 
         setImage(background);
+    }
+
+    public boolean isCurrentlyFaded() {
+        return isCurrentlyFaded;
     }
 
     private final Color fadedColor = new Color(0.8f, 0.8f, 0.8f, 0.5f);
@@ -27,6 +32,7 @@ public class ImageWindow extends VisWindow{
     private final float removalInterval = 0.2f*clockRate;
     private final float alphaRemovalInterval = 0.5f*clockRate;
     public void setFaded() {
+        isCurrentlyFaded = true;
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(
                 new TimerTask() {
@@ -41,6 +47,7 @@ public class ImageWindow extends VisWindow{
     }
 
     public void setNonFaded() {
+        isCurrentlyFaded = false;
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(
                 new TimerTask() {

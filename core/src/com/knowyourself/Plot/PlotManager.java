@@ -169,35 +169,29 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         }
     }
 
-    private ImageWindow notFaded1, notFaded2;
     public boolean setImageWindowImage(ImageWindow iw, String dir) {
-        if(iw.getImagePath().equals(dir)) {
-            Gdx.app.log("Image", "Already On Screen");
-            return true;
-        }
         if(iw.isCurrentlyBlank()) {
             Gdx.app.log("Image", "Replacing a Blank Screen");
             iw.changeImage(dir, new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
             iw.setNonFaded();
-            if(notFaded1 == null) {
-                notFaded1 = iw;
-            } else if (notFaded2 == null) {
-                notFaded2 = iw;
-            }
-
             return true;
         }
-        if(notFaded1 != null && iw.getImagePath().equals(notFaded1.getImagePath())) {
-            Gdx.app.log("Image", "Fading 1 out");
-            iw.setFaded();
-            notFaded1 = null;
+        if(!iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
+            Gdx.app.log("Image", "Already On Screen");
+            return true;
+        } else if (iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
+            Gdx.app.log("Image", "fade in");
+            iw.setNonFaded();
+            return true;
+        } else {
+            if(!iw.isCurrentlyFaded()) {
+                Gdx.app.log("Image", "fade out");
+                iw.setFaded();
+                return false;
+            }
+            Gdx.app.log("Image", "do nothing");
+            return false;
         }
-        if(notFaded2 != null && iw.getImagePath().equals(notFaded2.getImagePath())) {
-            Gdx.app.log("Image", "Fading 2 out");
-            iw.setFaded();
-            notFaded2 = null;
-        }
-        return false;
     }
 
 }
