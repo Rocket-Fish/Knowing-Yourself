@@ -22,7 +22,7 @@ public class ImageWindow extends VisWindow{
     private final Color fadedColor = new Color(0.8f, 0.8f, 0.8f, 0.5f);
     private final Color fullColor = new Color(1, 1, 1, 1);
     private Color currentColor = new Color(0.8f, 0.8f, 0.8f, 0.5f);
-    private final float totalTime = 0.2f;
+    private final float totalTime = 0.4f;
     private final float clockRate = 1/100f;
     private final float removalInterval = 0.2f*clockRate;
     private final float alphaRemovalInterval = 0.5f*clockRate;
