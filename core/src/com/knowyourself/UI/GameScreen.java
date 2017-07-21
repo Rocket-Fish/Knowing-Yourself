@@ -7,6 +7,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
@@ -27,8 +29,29 @@ public class GameScreen extends GeneralScreens {
     private ArrayList<Dialogue> listofDialogues;
     public GameScreen(AssetManager assets, Game game) {
         super(assets, game);
-        setBackgroundColor(255, 255, 255, 1);
+
+        Skin skin = VisUI.getSkin();
+        /*
+        VisUI.dispose(true);
+
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("CasablancaAntique.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 14;
+
+        ObjectMap<String, Object> fontMap = new ObjectMap<String, Object>();
+        fontMap.put("default-font", generator.generateFont(parameter));
+        fontMap.put("small-font", generator.generateFont(parameter));
+
+        SkinLoader.SkinParameter par = new SkinLoader.SkinParameter(fontMap);
+
+        assets.load(VisUI.SkinScale.X1.getSkinFile().path(), Skin.class, par);
         assets.finishLoading();
+
+        Skin skin = assets.get(VisUI.SkinScale.X1.getSkinFile().path());
+        VisUI.load(skin);
+*/
+        VisUI.load();
+        setBackgroundColor(255, 255, 255, 1);
 
         plotChoices = new ArrayList<Choice>();
         listofDialogues = new ArrayList<Dialogue>();
@@ -44,6 +67,7 @@ public class GameScreen extends GeneralScreens {
                 prevLine = d.getId();
             }
         }
+
     }
 
     @Override
@@ -93,7 +117,6 @@ public class GameScreen extends GeneralScreens {
 
     @Override
     public void preShow(final Table table, InputMultiplexer multiplexer) {
-        VisUI.load(VisUI.SkinScale.X1);
         table.add().expand().fill();
         System.out.println(assets.getAssetNames());
 
@@ -132,6 +155,7 @@ public class GameScreen extends GeneralScreens {
             }
         });
 
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1f)));
     }
 
     @Override

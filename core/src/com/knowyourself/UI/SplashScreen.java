@@ -23,11 +23,11 @@ public class SplashScreen extends GeneralScreens {
     private final int slashMinTime = 3;
     public SplashScreen(Game game) {
         super(null, game);
+
         setBackgroundColor(255, 255, 255, 1);
 
         // Sorry this is terrible code
         FontGenerator.generate(48, "CasablancaAntique.ttf");
-
         FileHandleResolver resolver = new InternalFileHandleResolver();
         assets = new AssetManager(resolver);
 

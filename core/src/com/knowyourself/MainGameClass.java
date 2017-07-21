@@ -5,6 +5,7 @@ import com.knowyourself.UI.SplashScreen;
 
 public class MainGameClass extends Game {
 	public MainGameClass() {
+
 	}
 
 	@Override
