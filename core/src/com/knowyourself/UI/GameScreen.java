@@ -15,7 +15,6 @@ import com.knowyourself.Constants;
 import com.knowyourself.Plot.Choice;
 import com.knowyourself.Plot.Dialogue;
 import com.knowyourself.Plot.PlotManager;
-import com.knowyourself.utils.ImageWindow;
 import com.knowyourself.utils.Text;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.PopupMenu;
