@@ -140,28 +140,46 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         characterBeingSpokenTo = whichCharacterIsThis(spokenTo);
 
         try {
+            boolean continuing=false;
             if(speaking.equals("Player")) {
                 for(int ps:playerSide) {
+                    if(continuing) {
+                        imageWindows[ps].setFaded();
+                        continue;
+                    }
                     if(setImageWindowImage(imageWindows[ps], Constants.charDirectory+speakingCharacter)) {
-                        break;
+                        continuing = true;
                     }
                 }
             } else {
                 for(int npcs: npcSide) {
+                    if(continuing) {
+                        imageWindows[npcs].setFaded();
+                        continue;
+                    }
                     if(setImageWindowImage(imageWindows[npcs], Constants.charDirectory+speakingCharacter)) {
-                        break;
+                        continuing = true;
                     }
                 }
             }
+            continuing = false;
             if(spokenTo.equals("Player")) {
                 for(int ps:playerSide) {
+                    if(continuing) {
+                        imageWindows[ps].setFaded();
+                        continue;
+                    }
                     if(setImageWindowImage(imageWindows[ps], Constants.charDirectory+characterBeingSpokenTo))
-                        break;
+                        continuing = true;
                 }
             } else {
                 for(int npcs: npcSide) {
+                    if(continuing) {
+                        imageWindows[npcs].setFaded();
+                        continue;
+                    }
                     if(setImageWindowImage(imageWindows[npcs], Constants.charDirectory+characterBeingSpokenTo))
-                        break;
+                        continuing = true;
                 }
             }
         } catch (GdxRuntimeException e) {

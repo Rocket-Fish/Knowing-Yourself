@@ -32,6 +32,8 @@ public class ImageWindow extends VisWindow{
     private final float removalInterval = 0.2f*clockRate;
     private final float alphaRemovalInterval = 0.5f*clockRate;
     public void setFaded() {
+        if(isCurrentlyFaded())
+            return;
         isCurrentlyFaded = true;
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(
@@ -47,6 +49,8 @@ public class ImageWindow extends VisWindow{
     }
 
     public void setNonFaded() {
+        if(!isCurrentlyFaded)
+            return;
         isCurrentlyFaded = false;
         Timer timer = new Timer(true);
         timer.scheduleAtFixedRate(
