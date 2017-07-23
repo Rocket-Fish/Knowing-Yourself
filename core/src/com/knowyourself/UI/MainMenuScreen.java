@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.bearfishapps.libs.GeneralScreens;
 import com.bearfishapps.libs.Tools.FontGenerator;
 import com.bearfishapps.libs.Tools.UICreationTools.CustomLabel;
+import com.knowyourself.Acts;
 import com.knowyourself.Constants;
 
 public class MainMenuScreen extends GeneralScreens {
@@ -56,6 +57,23 @@ public class MainMenuScreen extends GeneralScreens {
         loadingTable.add(loading);
 
         actSelectionTable.setFillParent(true);
+        FontGenerator.generate(48, Constants.font);
+        CustomLabel.make(FontGenerator.returnFont(), Color.BLACK);
+        for(Acts act: Acts.values()) {
+            Label label = new Label(act.getName(), CustomLabel.style);
+            label.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(new Runnable() {
+                        @Override
+                        public void run() {
+                            game.setScreen(new GameScreen(assets, game, act.getName()));
+                        }
+                    })));
+                }
+            });
+            actSelectionTable.add(label).pad(3).row();
+        }
 
         stage.addActor(loadingTable);
         stage.addActor(actSelectionTable);
@@ -68,7 +86,7 @@ public class MainMenuScreen extends GeneralScreens {
                 stage.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(new Runnable() {
                     @Override
                     public void run() {
-                        game.setScreen(new GameScreen(assets, game));
+                        game.setScreen(new GameScreen(assets, game, Acts.A1.getName()));
                     }
                 })));
             }

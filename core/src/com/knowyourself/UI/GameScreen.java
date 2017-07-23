@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.bearfishapps.libs.GeneralScreens;
-import com.knowyourself.Acts;
 import com.knowyourself.Constants;
 import com.knowyourself.Plot.Choice;
 import com.knowyourself.Plot.Dialogue;
@@ -26,7 +25,7 @@ public class GameScreen extends GeneralScreens {
 
     private ArrayList<Choice> plotChoices;
     private ArrayList<Dialogue> listofDialogues;
-    public GameScreen(AssetManager assets, Game game) {
+    public GameScreen(AssetManager assets, Game game, String act) {
         super(assets, game);
 
         VisUI.load();
@@ -34,7 +33,7 @@ public class GameScreen extends GeneralScreens {
 
         plotChoices = new ArrayList<Choice>();
         listofDialogues = new ArrayList<Dialogue>();
-        String unparsed[] = assets.get( Constants.textDirectory+ Acts.A1.getName(), Text.class ).getString().split("\n");
+        String unparsed[] = assets.get( Constants.textDirectory+ act, Text.class ).getString().split("\n");
         int prevLine = -1;
         for(String upar: unparsed) {
             if(upar.contains("[sel:")) {
