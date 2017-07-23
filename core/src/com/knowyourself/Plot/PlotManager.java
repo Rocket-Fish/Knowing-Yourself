@@ -221,12 +221,12 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         }
         if(!iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
             Gdx.app.log("Image", "Already On Screen");
-//            if(forneaExists)
-//                iw.setFaded();
+            if(forneaExists)
+                iw.setFaded();
             return true;
         } else if (iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
             Gdx.app.log("Image", "fade in");
-//            if(!forneaExists)
+            if(!forneaExists)
                 iw.setNonFaded();
             return true;
         } else {
