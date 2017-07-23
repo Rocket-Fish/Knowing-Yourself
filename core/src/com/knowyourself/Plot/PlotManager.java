@@ -128,12 +128,14 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         this.assets = assets;
     }
 
+    private boolean forneaExists = false;
     private void highlightPeople(String speaking, String spokenTo) {
         final int []playerSide = {0, 1, 2};
         final int []npcSide = {3, 4, 5};
 
+        forneaExists = false;
         if(speaking.equals("Fornea") || spokenTo.equals("Fornea")) {
-            return;
+            forneaExists = true;
         }
 
         String speakingCharacter ="", characterBeingSpokenTo="";
@@ -142,7 +144,8 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
 
         try {
             boolean continuing=false;
-            if(speaking.equals("Player")) {
+            if(speaking.equals("Fornea")) {
+            }else if(speaking.equals("Player")) {
                 for(int ps:playerSide) {
                     if(continuing) {
                         imageWindows[ps].setFaded();
@@ -164,7 +167,9 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
                 }
             }
             continuing = false;
-            if(spokenTo.equals("Player")) {
+            if(spokenTo.equals("Fornea")) {
+
+            } else if(spokenTo.equals("Player")) {
                 for(int ps:playerSide) {
                     if(continuing) {
                         imageWindows[ps].setFaded();
@@ -192,15 +197,19 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         if(iw.isCurrentlyBlank()) {
             Gdx.app.log("Image", "Replacing a Blank Screen");
             iw.changeImage(dir, new TextureRegionDrawable(new TextureRegion(assets.get(dir, Texture.class))));
-            iw.setNonFaded();
+            if(!forneaExists)
+                iw.setNonFaded();
             return true;
         }
         if(!iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
             Gdx.app.log("Image", "Already On Screen");
+//            if(forneaExists)
+//                iw.setFaded();
             return true;
         } else if (iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
             Gdx.app.log("Image", "fade in");
-            iw.setNonFaded();
+//            if(!forneaExists)
+                iw.setNonFaded();
             return true;
         } else {
             if(!iw.isCurrentlyFaded()) {
