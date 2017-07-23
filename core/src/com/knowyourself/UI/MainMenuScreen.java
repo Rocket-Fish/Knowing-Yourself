@@ -16,8 +16,8 @@ import com.bearfishapps.libs.Tools.UICreationTools.CustomLabel;
 import com.knowyourself.Constants;
 
 public class MainMenuScreen extends GeneralScreens {
-    Label title, play, actSelection, loading;
-    Table loadingTable;
+    private Label title, play, actSelection, loading;
+    private Table loadingTable, actSelectionTable;
     public MainMenuScreen(AssetManager assetManager, Game game) {
         super(assetManager, game);
         setBackgroundColor(255, 255, 255, 1);
@@ -39,6 +39,9 @@ public class MainMenuScreen extends GeneralScreens {
         loading = new Label("Loading ...", CustomLabel.style);
 
         loadingTable = new Table();
+
+        actSelectionTable = new Table();
+        actSelectionTable.setVisible(false);
     }
 
     @Override
@@ -52,8 +55,10 @@ public class MainMenuScreen extends GeneralScreens {
         loadingTable.center().bottom();
         loadingTable.add(loading);
 
-        stage.addActor(table);
+        actSelectionTable.setFillParent(true);
+
         stage.addActor(loadingTable);
+        stage.addActor(actSelectionTable);
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(1f)));
 
         play.addAction(Actions.repeat(RepeatAction.FOREVER, Actions.sequence(Actions.fadeIn(1f), Actions.fadeOut(1f))));
@@ -68,6 +73,25 @@ public class MainMenuScreen extends GeneralScreens {
                 })));
             }
         });
+
+        actSelection.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                table.addAction(Actions.sequence(Actions.fadeOut(1f), Actions.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        table.setVisible(false);
+                        actSelectionTable.addAction(Actions.sequence(Actions.alpha(0), Actions.run(new Runnable() {
+                            @Override
+                            public void run() {
+                                actSelectionTable.setVisible(true);
+                            }
+                        }), Actions.fadeIn(1f)));
+                    }
+                })));
+            }
+        });
+
     }
 
     @Override

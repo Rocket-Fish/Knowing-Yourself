@@ -10,7 +10,7 @@ public class Constants {
             font = "CasablancaAntique.ttf";
 
     public static String textDirectory = "DialogueText/";
-    public static String A1 = "A1.txt";
+
     public static String charDirectory = "Characters/";
     public static String
             blank = "Blank.png",
@@ -205,3 +205,4 @@ public class Constants {
 
 
 }
+

@@ -33,7 +33,7 @@ public class GameScreen extends GeneralScreens {
 
         plotChoices = new ArrayList<Choice>();
         listofDialogues = new ArrayList<Dialogue>();
-        String unparsed[] = assets.get( Constants.textDirectory+Constants.A1, Text.class ).getString().split("\n");
+        String unparsed[] = assets.get( Constants.textDirectory+Acts.A1.getName(), Text.class ).getString().split("\n");
         int prevLine = -1;
         for(String upar: unparsed) {
             if(upar.contains("[sel:")) {
@@ -106,6 +106,7 @@ public class GameScreen extends GeneralScreens {
         PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues);
         dtp.setClickCallBack(manager);
         manager.attachImageWindows(iw, assets);
+        manager.showNextDialogue();
 
         stage.addActor(dtp);
         for(ImageWindow i: iw) {
