@@ -59,6 +59,7 @@ public class MainMenuScreen extends GeneralScreens {
         actSelectionTable.setFillParent(true);
         FontGenerator.generate(48, Constants.font);
         CustomLabel.make(FontGenerator.returnFont(), Color.BLACK);
+        int i = 1;
         for(Acts act: Acts.values()) {
             Label label = new Label(act.getName(), CustomLabel.style);
             label.addListener(new ClickListener() {
@@ -72,7 +73,10 @@ public class MainMenuScreen extends GeneralScreens {
                     })));
                 }
             });
-            actSelectionTable.add(label).pad(3).row();
+            actSelectionTable.add(label).pad(5);
+            if(i%7 == 0)
+                actSelectionTable.row();
+            i++;
         }
 
         stage.addActor(loadingTable);

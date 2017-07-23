@@ -1,5 +1,6 @@
 package com.knowyourself.Plot;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,10 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.knowyourself.Constants;
 import com.knowyourself.UI.DialogueTextPlane;
+import com.knowyourself.UI.GameScreen;
 import com.knowyourself.UI.ImageWindow;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -22,11 +26,13 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
     private ArrayList<Dialogue> listofDialogues;
     private ImageWindow[] imageWindows;
     private AssetManager assets;
+    private Game game;
 
-    public PlotManager(DialogueTextPlane dialogueTextPlane, ArrayList<Choice> plotChoices, ArrayList<Dialogue> listofDialogues) {
+    public PlotManager(Game game, DialogueTextPlane dialogueTextPlane, ArrayList<Choice> plotChoices, ArrayList<Dialogue> listofDialogues) {
         this.dialogueTextPlane = dialogueTextPlane;
         this.plotChoices = plotChoices;
         this.listofDialogues = listofDialogues;
+        this.game = game;
 
         // Null Pointer Exception, causes crahses
 //        showNextDialogue();
@@ -62,7 +68,18 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
     public void showNextDialogue() {
         if (listofDialogues != null) {
 
-            if(targettedNextLine!= -1) {
+            if(targettedNextLine>50) {
+                /////////////for testing purposes
+                try {
+                    ByteBuffer dbuf = ByteBuffer.allocate(2);
+                    dbuf.putShort((short)targettedNextLine);
+                    byte[] bytes = dbuf.array();
+                    String str = new String(bytes, "US-ASCII");
+                    Gdx.app.log("Transition to", str);
+                    game.setScreen(new GameScreen(assets, game, str));
+                } catch (UnsupportedEncodingException e) {
+                    Gdx.app.log("Error", "Unsupported encoding US-ASCII");}
+            } else if(targettedNextLine!= -1) {
                 int pos = 0;
                 for(Dialogue dd: listofDialogues) {
                     if(dd.getId() == targettedNextLine) {

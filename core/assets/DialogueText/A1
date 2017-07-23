@@ -17,4 +17,4 @@
 18][t:17]Sol`Player`This is a quiet town. We like it that way. Don't worry too much about the monk. I'm sure he'll be friendly.
 15][t:17]Sol`Player`Don't antagonize him. Last thing we need is for some monk to come telling us how to raise a child.
 14]Lawrence`Player`That's my girl. Be on your way. I'm sure he's waiting.
-17]Lawrence`Player`Quickly now. Good luck!
+17][GOTO:A2]Lawrence`Player`Quickly now. Good luck!

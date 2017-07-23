@@ -28,7 +28,8 @@ public class GameScreen extends GeneralScreens {
     public GameScreen(AssetManager assets, Game game, String act) {
         super(assets, game);
 
-        VisUI.load();
+        if(!VisUI.isLoaded())
+            VisUI.load();
         setBackgroundColor(255, 255, 255, 1);
 
         plotChoices = new ArrayList<Choice>();
@@ -103,7 +104,7 @@ public class GameScreen extends GeneralScreens {
 
         ImageWindow[] iw = {createBlankWindow(0),createBlankWindow(1),createBlankWindow(2),createBlankWindow(3),createBlankWindow(4),createBlankWindow(5)};
 
-        PlotManager manager = new PlotManager(dtp, plotChoices, listofDialogues);
+        PlotManager manager = new PlotManager(game,dtp, plotChoices, listofDialogues);
         dtp.setClickCallBack(manager);
         manager.attachImageWindows(iw, assets);
         manager.showNextDialogue();

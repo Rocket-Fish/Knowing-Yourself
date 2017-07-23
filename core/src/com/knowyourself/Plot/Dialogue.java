@@ -1,5 +1,10 @@
 package com.knowyourself.Plot;
 
+import com.badlogic.gdx.Gdx;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+
 public class Dialogue{
     private int id, next;
     private String speaker, spokenTo, content;
@@ -52,6 +57,7 @@ public class Dialogue{
         String[] bracketSections = line.split("]");
         String[] contentSections = bracketSections[bracketSections.length - 1].split("`");
         int nextLine = -1;
+
         if(bracketSections.length > 2) {
             int count = 0;
             for(String s: bracketSections) {
@@ -63,6 +69,17 @@ public class Dialogue{
                 if(s.contains("[t:")) {
                     String[] ss = s.split("t:");
                     nextLine = Integer.valueOf(ss[ss.length-1]);
+                } else if(s.contains("[GOTO:")) {
+                    String[] ss = s.split("\\[GOTO:");
+                    // Basically what we do here is t convert the Letters of where to go next into an integer
+                    // via the chars ascii values and then i could convert them back ot string later.
+                    try {
+                        byte[] bytes = ss[ss.length-1].getBytes("US-ASCII");
+                        ByteBuffer wrapped = ByteBuffer.wrap(bytes);
+                        nextLine = wrapped.getShort();
+                    } catch (UnsupportedEncodingException e) {
+                        Gdx.app.log("Error", "Unsupported encoding US-ASCII"); }
+
                 }
 
                 count ++;
