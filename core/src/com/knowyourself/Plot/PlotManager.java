@@ -77,6 +77,7 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
                     String str = new String(bytes, "US-ASCII");
                     Gdx.app.log("Transition to", str);
                     game.setScreen(new GameScreen(assets, game, str));
+                    return;
                 } catch (UnsupportedEncodingException e) {
                     Gdx.app.log("Error", "Unsupported encoding US-ASCII");}
             } else if(targettedNextLine!= -1) {

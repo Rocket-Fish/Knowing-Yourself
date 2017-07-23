@@ -1,1 +1,34 @@
- 
+0]Player`Player`I wonder what should I do.
+[sel:3:1][1]Go Outside[2]Look Around[3]Start Conversation
+1][GOTO:B1]Player`Player`I'm going to go outside.
+2][t:3]Player`Player`I'm going to look around.
+4][t:5]Player`Lawrence`I was wondering about something.
+3][t:4]Fornea`Player`This is your home. It's a nice place. Bigger than it needs to be. Ever wonder why your foster fathers feel the need to live all the way out here? Have they ever told you why you must live in a tiny town like this? You must be lonely here. Perhaps they would know.
+[sel:3][30]Nope, not interested[4]I wonder why...
+30][GOTO:B1]Player`Player`<You walk out of the house>
+5]Lawrence`Player`Of course.
+[sel:4:2][6]Who's Mikhail?[7]My Adoption[8]Your plans For the day[11]Bye
+6]Player`Lawrence`So, this monk. Mikhail. What's he like? 
+9]Sol`Player`He's a monk. He probably doesn't get out much. I've heard he's friendly.
+10]Lawrence`Player`If he's quiet, he'll fit right in. We can just live our life away from his.
+[sel:2][18]Why is that important[19]Sure
+18]Player`Lawrence`Why do you care? I think it would be nice to have another face around here.
+20]Sol`Player`I know it's tough for you out here. We're not trying to say you can't talk to people. Lawrence just wants you to be cautious.
+19][t:sel:2]Player`Lawrence`Yeah, I guess.
+7]Player`Lawrence`I know you don't like to talk about it, but can you tell me something about my adoption?
+21]Lawrence`Player`My girl, I've told you before...
+22]Sol`Player`It's alright. Your parents couldn't take care of you. Your dad was far away in a small human town, and probably didn't even know you were born. Your mother was a mess. I offered to take you in. Lawrence has helped a great deal in raising you, as well.
+[sel:2][23]Who were my parents?[24]Forget it
+23]Player`Sol`But who was my dad? And who was my mom?
+25]Lawrence`Player`It doesn't matter. We're your family now. 
+24]Player`Sol`You say the same thing every time. Forget it.
+26][t:sel:2]Sol`Player`We can talk later.
+8]Player`Lawrence`So, while I'm finding this monk, what will you be doing?
+13]Lawrence`Player`I'll be going to meet with Lady Sariel. She said something about needing me to check for some noises in the castle. Sol will be just down the path watching the village.
+14]Sol`Player`The newcomer has me nervous. I'll make sure nothing strange happens in the village.
+[sel:2][15]Like what?[16]Okay
+15]Player`Sol`Like what?
+17]Sol`Player`Like if he harasses you. Or if he brought someone else with him.
+16][t:sel:2]Player`Sol`Fair enough.
+11]Player`Lawrence`I'll see you later.
+12][t:sel:1]Lawrence`Player`Of couse. 

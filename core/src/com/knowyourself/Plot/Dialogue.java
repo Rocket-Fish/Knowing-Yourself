@@ -67,8 +67,15 @@ public class Dialogue{
                 }
 
                 if(s.contains("[t:")) {
-                    String[] ss = s.split("t:");
-                    nextLine = Integer.valueOf(ss[ss.length-1]);
+                    String[] ss = s.split(":");
+                    if(ss.length == 2) {
+                        nextLine = Integer.valueOf(ss[ss.length - 1]);
+                    } else if(ss.length==3 && ss[1].equals("sel")) {
+                        byte sInByte = 's';
+                        byte value = Byte.valueOf(ss[2]);
+                        nextLine = (sInByte&0xff)<<8|value&0xff;
+                        Gdx.app.log("sInBytes", String.valueOf((sInByte&0xff)<<8));
+                    }
                 } else if(s.contains("[GOTO:")) {
                     String[] ss = s.split("\\[GOTO:");
                     // Basically what we do here is t convert the Letters of where to go next into an integer

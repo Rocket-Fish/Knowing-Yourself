@@ -127,7 +127,8 @@ public class ImageWindow extends VisWindow{
     }
 
     public void setOnTop() {
-        this.setZIndex(this.getParent().getChildren().size+1);
+        if(this.getParent() != null)
+            this.setZIndex(this.getParent().getChildren().size+1);
     }
 }
 
