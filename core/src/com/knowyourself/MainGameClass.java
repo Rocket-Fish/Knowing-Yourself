@@ -11,6 +11,5 @@ public class MainGameClass extends Game {
 	@Override
 	public void create () {
 		this.setScreen(new SplashScreen(this));
-//		this.setScreen(new ScreenTesting(this));
 	}
 }
