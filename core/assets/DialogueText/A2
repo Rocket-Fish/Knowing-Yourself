@@ -4,7 +4,7 @@
 2][t:3]Player`Player`I'm going to look around.
 4][t:5]Player`Lawrence`I was wondering about something.
 3][t:4]Fornea`Player`This is your home. It's a nice place. Bigger than it needs to be. Ever wonder why your foster fathers feel the need to live all the way out here? Have they ever told you why you must live in a tiny town like this? You must be lonely here. Perhaps they would know.
-[sel:3][30]Nope, not interested[4]I wonder why...
+[sel:2][30]Nope, not interested[4]I wonder why...
 30][GOTO:B1]Player`Player`<You walk out of the house>
 5]Lawrence`Player`Of course.
 [sel:4:2][6]Who's Mikhail?[7]My Adoption[8]Your plans For the day[11]Bye

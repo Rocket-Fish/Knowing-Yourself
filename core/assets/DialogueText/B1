@@ -1,1 +1,8 @@
- 
+0]Player, Player, Where do I go now? 
+[sel:4][1] Go Home [2] Go To Torrent's [3] Go to Town [4] Look Around
+1]Player, Player, Off to home, I go.
+2]Player, Player, Heading to Torrent's, I guess...
+3]Player, Player, Going to town, it is.
+4]Player, Player, <Looking Around>
+5]Fronea, Player, This is the hill where you live. It looks down on Castle Fallow and the few buildings in the valley. You feel very far away when you look at the people below, but it is only a short walk. Nearby is the crazy old hermit Torrent, who hates visitors.
+[sel:3][1] Go Home [2] Go To Torrent's [3] Go to Town

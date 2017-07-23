@@ -69,8 +69,21 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         if (listofDialogues != null) {
 
             if(targettedNextLine>50) {
-                /////////////for testing purposes
+                byte x = 1;
+                byte baseByte = (byte)~(x & 0);
+                if((targettedNextLine&(baseByte<<8))==(('s'&0xff)<<8)) {
+                    Gdx.app.log("good base", "already In");
+                    int id = (byte) (baseByte&targettedNextLine);
+                    for(Choice c:plotChoices) {
+                        if(c.getID() == id) {
+                            displayChoice(c);
+                            return;
+                        }
+                    }
+                } else
+                    /////////////for testing purposes
                 try {
+
                     ByteBuffer dbuf = ByteBuffer.allocate(2);
                     dbuf.putShort((short)targettedNextLine);
                     byte[] bytes = dbuf.array();
@@ -106,33 +119,39 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         }
     }
 
+    private void displayChoice(Choice c) {
+        String[] choices = c.getChoiceDisplay().toArray(new String[0]);
+
+        Integer[] whatever = Arrays.stream( c.getDialoguesToTransferTo() ).boxed().toArray( Integer[]::new );
+
+        //confirmdialog may return result of any type, here we are just using ints
+        Dialogs.showConfirmDialog(dialogueTextPlane.getStage(), "", "what do you say?",
+                choices, whatever,
+                new ConfirmDialogListener<Integer>() {
+                    @Override
+                    public void result (Integer result) {
+                        Gdx.app.log("Result", String.valueOf(result));
+                        targettedNextLine = result;
+                        showNextDialogue();
+                    }
+                });
+
+    }
+
     @Override
     public void onClick() {
         boolean doNotDisplay = false;
+
         Iterator<Choice> pc = plotChoices.iterator();
         while(pc.hasNext()) {
             Choice c = pc.next();
             if(c.getNextLine()==currentLineID) {
-                pc.remove();
+                if(c.getID() == -1)
+                    pc.remove();
                 doNotDisplay = true;
 
 //////////////////////////////////////////////////////////////////////////////////
-
-                String[] choices = c.getChoiceDisplay().toArray(new String[0]);
-
-                Integer[] whatever = Arrays.stream( c.getDialoguesToTransferTo() ).boxed().toArray( Integer[]::new );
-
-                //confirmdialog may return result of any type, here we are just using ints
-                Dialogs.showConfirmDialog(dialogueTextPlane.getStage(), "", "what do you say?",
-                        choices, whatever,
-                        new ConfirmDialogListener<Integer>() {
-                            @Override
-                            public void result (Integer result) {
-                                Gdx.app.log("Result", String.valueOf(result));
-                                targettedNextLine = result;
-                                showNextDialogue();
-                            }
-                        });
+                displayChoice(c);
 
 //////////////////////////////////////////////////////////////////////////////////
             }
@@ -226,8 +245,7 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
             return true;
         } else if (iw.isCurrentlyFaded() && iw.getImagePath().equals(dir)) {
             Gdx.app.log("Image", "fade in");
-            if(!forneaExists)
-                iw.setNonFaded();
+            iw.setNonFaded();
             return true;
         } else {
             if(!iw.isCurrentlyFaded()) {

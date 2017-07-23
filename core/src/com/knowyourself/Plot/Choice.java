@@ -58,6 +58,8 @@ public class Choice{
         Choice c = new Choice(afterLine, transfer, choiceDisplay);
         if(tag != null)
             c.setID(Integer.valueOf(tag));
+         else
+            c.setID(-1);
 
         return c;
     }
