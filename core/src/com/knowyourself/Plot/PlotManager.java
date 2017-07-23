@@ -28,7 +28,8 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         this.plotChoices = plotChoices;
         this.listofDialogues = listofDialogues;
 
-        showNextDialogue();
+        // Null Pointer Exception, causes crahses
+//        showNextDialogue();
     }
 
     private String whichCharacterIsThis(String inputChar) {
