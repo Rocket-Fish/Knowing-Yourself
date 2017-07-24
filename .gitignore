@@ -9,7 +9,12 @@ hs_err_pid*
 /core/assets/*
 !DialogueText/
 
+/desktop/*
+!DesktopLauncher.java
+!META-INF
+
 /out/
+/out-win32/
 
 ## Robovm
 /ios/robovm-build/

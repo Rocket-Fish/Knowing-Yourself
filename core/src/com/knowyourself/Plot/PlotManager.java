@@ -68,7 +68,7 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
     public void showNextDialogue() {
         if (listofDialogues != null) {
 
-            if(targettedNextLine>50) {
+            if(targettedNextLine>63) {
                 byte x = 1;
                 byte baseByte = (byte)~(x & 0);
                 if((targettedNextLine&(baseByte<<8))==(('s'&0xff)<<8)) {
@@ -125,7 +125,7 @@ public class PlotManager implements DialogueTextPlane.DialogueOnClickCallback{
         Integer[] whatever = Arrays.stream( c.getDialoguesToTransferTo() ).boxed().toArray( Integer[]::new );
 
         //confirmdialog may return result of any type, here we are just using ints
-        Dialogs.showConfirmDialog(dialogueTextPlane.getStage(), "", "what do you say?",
+        Dialogs.showConfirmDialog(dialogueTextPlane.getStage(), "", "what do you do?",
                 choices, whatever,
                 new ConfirmDialogListener<Integer>() {
                     @Override

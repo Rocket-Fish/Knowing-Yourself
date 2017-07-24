@@ -7,7 +7,8 @@ public class Constants {
     public static String
             logo1 = "Bearfish.png",
             logo2 = "RocketFish.png",
-            font = "CasablancaAntique.ttf";
+            font = "CasablancaAntique.ttf",
+            prefName = "com.bearfishapps.knowyourself.netouchpas";
 
     public static String textDirectory = "DialogueText/";
 

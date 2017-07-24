@@ -1,6 +1,7 @@
 package com.knowyourself.Plot;
 
 import com.badlogic.gdx.Gdx;
+import com.bearfishapps.libs.Tools.Prefs;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
@@ -87,6 +88,12 @@ public class Dialogue{
                     } catch (UnsupportedEncodingException e) {
                         Gdx.app.log("Error", "Unsupported encoding US-ASCII"); }
 
+                }
+
+                if(s.contains("[set")) {
+                    String[] instructions = s.split(":");
+                    String[] nameNmod = instructions[1].split("=");
+                    Prefs.setString(nameNmod[0], nameNmod[1]);
                 }
 
                 count ++;

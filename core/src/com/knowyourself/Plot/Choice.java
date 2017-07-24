@@ -1,5 +1,7 @@
 package com.knowyourself.Plot;
 
+import com.bearfishapps.libs.Tools.Prefs;
+
 import java.util.ArrayList;
 
 public class Choice{
@@ -51,8 +53,24 @@ public class Choice{
                 continue;
             }
             String[] secondarySelection = str.split("]");
-            transfer[count++] = Integer.valueOf(secondarySelection[0]);
-            choiceDisplay.add(secondarySelection[1]);
+            if(!secondarySelection[0].contains(":")) {
+                transfer[count++] = Integer.valueOf(secondarySelection[0]);
+                choiceDisplay.add(secondarySelection[1]);
+            } else if(secondarySelection[0].contains(":")) {
+                String[] ss = secondarySelection[0].split("\\:");
+                String[] sss = ss[1].split("==");
+
+                if(Prefs.getStringValue(sss[0]).equals(sss[1])) {
+                    transfer[count++] = Integer.valueOf(ss[0]);
+                    choiceDisplay.add(secondarySelection[1]);
+                } else {
+                    int[] t = new int[transfer.length-1];
+                    for(int i = 0; i < count-1; i ++) {
+                        t[i]=transfer[i];
+                    }
+                    transfer = t;
+                }
+            }
         }
 
         Choice c = new Choice(afterLine, transfer, choiceDisplay);

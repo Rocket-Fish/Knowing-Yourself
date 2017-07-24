@@ -14,7 +14,7 @@ public class Prefs {
         }
         */
     }
-
+/*
     public static void setBoolean(String name, boolean value) {
         prefs.putBoolean(name, value);
         prefs.flush();
@@ -23,13 +23,40 @@ public class Prefs {
     public static boolean isTrue(String name) {
         return prefs.getBoolean(name);
     }
+*/
+    private static void checkString(String name) {
+        if(!prefs.contains(name)) {
+            prefs.putString(name,"0");
+            prefs.flush();
+        }
+    }
+
+    public static void setString(String name, String value) {
+        checkString(name);
+        prefs.putString(name, value);
+        prefs.flush();
+    }
+
+    public static String getStringValue(String name) {
+        checkString(name);
+        return prefs.getString(name);
+    }
+
+    private static void checkInt(String name) {
+        if(!prefs.contains(name)) {
+            prefs.putInteger(name,0);
+            prefs.flush();
+        }
+    }
 
     public static void setInteger(String name, int value) {
+        checkInt(name);
         prefs.putInteger(name, value);
         prefs.flush();
     }
 
     public static int getIntValue(String name) {
+        checkInt(name);
         return prefs.getInteger(name);
     }
 }

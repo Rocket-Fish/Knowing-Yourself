@@ -1,1 +1,21 @@
- 
+0]Player`Player`What do I do now?
+[sel:3][1]Go outside[2]Look around[3]Talk to Torrent
+1][GOTO:B1]Player`Player`Why did I even come here?
+2]Player`Player`<Looking Around>
+5]Fornea`Player`It's a small single room. You spot an open book, and a pointy hat amongst the mess. You...
+6][set:torrentvoice=1]Torrent`Player`Begone, foul whispers!
+[sel:3][8:mikhailp==1]Say Nothing[20]Leave[3]Talk
+8]Mikhail`Torrent`So I'm not the only one hearing that voice?
+[sel:2][30]Leave[3]Talk to Torrent
+30][GOTO:B1]Player`Player`<Begins to leave>
+3]Player`Torrent`Hello Torrent.
+4]Torrent`Player`What are you doing here? Must you insist on bothering me?
+[sel:3][7]Are you a wizard?[9:torrentvoice==1]You heard a voice too?[11]Bye
+7]Player`Torrent`Is that a pointy hat? And is that a magic book? Are you a wizard?
+10]Torrent`Player`Must you bother me with such fool questions? You think because I own a pointy hat that makes me a wizard? And yes, I do know some magic, but that is not a magic book! It is a journal, and not for your eyes. 
+[sel:2][9:torrentvoice==1]You heard a voice too?[11]Bye
+11]Player`Torrent`Sorry for bothering you.
+12]Torrent`Player`Sure you are. Now leave. 
+[sel:2][30]Leave[2]Look around
+13]Torrent`Player`She is everywhere. I do not know who else hears her. She very rarely talks to me, because I have spells to protect me from her voice. Be wary.
+[sel:2][7]Are you a wizard[11]Bye
