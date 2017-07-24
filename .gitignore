@@ -13,6 +13,7 @@ hs_err_pid*
 !DesktopLauncher.java
 !META-INF
 
+/.gradle/
 /out/
 /out-win32/
 

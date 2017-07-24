@@ -15,6 +15,7 @@ import com.bearfishapps.libs.Tools.FontGenerator;
 import com.bearfishapps.libs.Tools.UICreationTools.CustomLabel;
 import com.knowyourself.Acts;
 import com.knowyourself.Constants;
+import com.knowyourself.utils.Text;
 
 public class MainMenuScreen extends GeneralScreens {
     private Label title, play, actSelection, loading;
@@ -45,6 +46,12 @@ public class MainMenuScreen extends GeneralScreens {
         actSelectionTable.setVisible(false);
     }
 
+    private boolean checkIfBlank(String text) {
+        if(text.equals(" "))
+            return true;
+        return false;
+    }
+
     @Override
     public void preShow(Table table, InputMultiplexer multiplexer) {
         table.center().top();
@@ -61,6 +68,8 @@ public class MainMenuScreen extends GeneralScreens {
         CustomLabel.make(FontGenerator.returnFont(), Color.BLACK);
         int i = 1;
         for(Acts act: Acts.values()) {
+            if(checkIfBlank(assets.get(Constants.textDirectory+act.getName(), Text.class).getString()))
+                continue;
             Label label = new Label(act.getName(), CustomLabel.style);
             label.addListener(new ClickListener() {
                 @Override

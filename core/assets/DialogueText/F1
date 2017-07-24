@@ -1,2 +1,23 @@
-1]Fornea`Player`This is the edge of the city. A lone shack stands opposite an old tavern, long abandoned by its owners. The sound of two men's laughter echoes from the windows.
-2]Mikhail`Player`Hey there! Pull up a seat, have a drink!
+3]Fornea`Player`This is the edge of the city. A lone shack stands opposite an old tavern, long abandoned by its owners. The sound of two men's laughter echoes from the windows.
+5]Mikhail`Player`Hey there! Pull up a seat, have a drink!
+6]Daelin`Player`Or several.
+[sel:3][1]Sure[2]Mikhail?[4]No
+2][t:7]Player`Daelin`Are you Mikhail? I'm looking for you.
+4]Player`Daelin`I don't drink.
+8]Daelin`Player`Right. No fun for the hill daughter. Suit yourself.
+9]Mikhail`Player`I don't believe we've met. I'm Mikhail.
+1]Player`Daelin`Why not, I'd love to.
+7]Mikhail`Player`I just arrived here. I'm supposed to become Castle Fallow's steward.
+10]Daelin`Mikhail`Now, I have to wonder. Why even have a caretaker? I mean, the castle's barely in use. Just one crazy woman running around in her underwear, and her decrepit manservant.
+11]Mikhail`Daelin`You mean Lady Sariel? And the caretaker Tristan? I had heard the lady was a strong woman, and that Tristan was kindly and hard working.
+12]Daelin`Mikhail`Oh, Lady Sariel is batshit insane. I hear everyone who goes up to the castle ends up like that after a while. And Tristan's feeble enough that they need you now.
+13]Mikhail`Player`Is that true?
+[sel:3][14]You'll be fine[15]I don't know[16]Its super dangerous
+14][t:17]Player`Mikhail`I'm sure you'll do fine. Daelin is exaggerating. 
+15][t:17]Player`Mikhail`I've never been inside the castle. I don't know. I've met Tristan, and he seems okay. Lady Sariel is reclusive.
+16]Player`Mikhail`I hear Lady Sariel ate the last monk that came to replace Tristan. And that there are beetles the size of your fist in all the walls.
+18]Mikhail`Player`Huh? Oh, you're joking. I'm sure I'll be fine, Daelin.
+17]Mikhail`Player`All the same, I'm glad I'm being escorted there. Are you the one taking me?
+[sel:2][19]I'll take care of you[20]I guess so 
+19]Player`Mikhail`Don't worry. I'll do everything I can to make sure you've moved in comfortably.
+20][t:26]Player`Mikhail`That's what I was told.

@@ -38,17 +38,16 @@ public class AssetFinder {
     public AssetFinder(AssetManager assetManager, FileHandleResolver resolver) {
         this.assetManager = assetManager;
         this.resolver = resolver;
-
         assetManager.setLoader(
                 Text.class,
                 new TextLoader(
                         new InternalFileHandleResolver()
                 )
         );
-
-        assets.add(new FolderAssetDescriptor("Characters", Texture.class));
         assets.add(new FolderAssetDescriptor("DialogueText", true));
+        assets.add(new FolderAssetDescriptor("Characters", Texture.class));
         assets.add(new FolderAssetDescriptor("Dialogues", Music.class));
+
     }
 
     public void load() {

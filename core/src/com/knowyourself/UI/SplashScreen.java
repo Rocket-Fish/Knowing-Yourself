@@ -1,6 +1,7 @@
 package com.knowyourself.UI;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
@@ -44,6 +45,7 @@ public class SplashScreen extends GeneralScreens {
     @Override
     public void step(float delta, float animationKeyFrame) {
         assets.update();
+        Gdx.app.log("Progress", String.valueOf(assets.getProgress()));
         if (assets.getProgress() > 0.5f && animationKeyFrame >= slashMinTime) {
             if(!isTransitioning) {
                 isTransitioning = true;
