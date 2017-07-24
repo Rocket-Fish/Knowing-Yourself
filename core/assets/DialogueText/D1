@@ -1,1 +1,26 @@
- 
+0]Player`Player`...
+[sel:5][1]Walk up the Hill[2]Go to City Bounds[3]Go to Castel Fallow[4]Look Around[5]Start Conversation
+1][GOTO:B1]Player`Player`<Begins walking>
+2][GOTO:E1]Player`Player`<Begins walking>
+3][GOTO:G1]Player`Player`<Begins walking>
+4]Player`Player`Looks Around
+8]Fornea`Player`The city streets of Fallow are usually nearly empty. Today the only person is Naomi, a recent arrival to the town who is both independent and late in her pregnancy.
+[sel:4][1]Walk up the Hill[2]Go to City Bounds[3]Go to Castel Fallow[5]Start Conversation
+5]Player`Naomi`Hi Naomi, how are you?
+6]Naomi`Player`Hey there! I'm good. It's beautiful out, isn't it?
+[sel:3:1][9]How's the baby?[10]Mikhail?[11]Bye
+9]Player`Naomi`How are you and the baby doing?
+13]Naomi`Player`It's hard work taking care of everything myself. Daelin keeps offering to help, but I don't want him involved.
+[sel:2][14]Why not? [15]I can help
+14]What's wrong with letting him help?
+16]Naomi`Player`He's short-sighted, obsessed, and a drunk. I don't need that kind of person raising my baby.
+[sel:2][15]Concerned[17]You need him
+15]You might need help sooner or later. I'll be here if you need me.
+18][t:sel:1]Naomi`Player`Maybe when I go into labour. I'll need somebody there. Or maybe that monk can help. Mikhail?
+17]Player`Naomi`You'll need help. Maybe it's time you gave him another chance.
+19][t:18]Naomi`Player`I'm concerned giving him another chance will mean he'll take over my life. But maybe he can help from time to time.
+10]Player`Naomi`Do you know anything about Mikhail, the monk that just arrived?
+20]Naomi`Player`A little. He's from Lovisa Lake, that small milling town to the west. I don't know what he practices, but he should fit in.
+21][t:sel:1]Naomi`Player`He's already getting along with Daelin. Just go to the tavern, you'll see.
+11]Player`Naomi`I'll see you around.
+12]Naomi`Player`I know. I look forward to it.
